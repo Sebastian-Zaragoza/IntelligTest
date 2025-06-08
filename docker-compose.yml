@@ -1,0 +1,68 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+  section-service:
+    build: ./section-service
+    container_name: section-service
+    ports:
+      - "4000:4000"
+    env_file:
+      - ./section-service/.env
+    depends_on:
+      - mongo
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "3000:3000"
+    env_file:
+      - "./api-gateway/.env"
+    depends_on:
+      - section-service
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    ports:
+      - "4001:4001"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - mongo
+  notes-service:
+    build: ./notes-service
+    container_name: notes-service
+    ports:
+      - "4002:4002"
+    env_file:
+      - ./notes-service/.env
+    depends_on:
+      - mongo
+  extracttext-service:
+    build: ./extracttext-service
+    container_name: extracttext-service
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./extracttext-service/.env
+  generatetest-service:
+    build: ./generatetest-service
+    container_name: generatetest-service
+    ports:
+      - "5001:5001"
+    env_file:
+      - ./generatetest-service/.env
+  evaluatetest-service:
+    build: ./evaluatetest-service
+    container_name: evaluatetest-service
+    ports:
+      - "5002:5002"
+    env_file:
+      - ./evaluatetest-service/.env
+volumes:
+  mongo_data:

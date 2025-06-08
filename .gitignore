@@ -1,0 +1,83 @@
+# === NODE.JS ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.*.local
+dist/
+build/
+coverage/
+*.log
+
+# === PYTHON ===
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+.Python
+env/
+venv/
+ENV/
+VENV/
+.venv/
+*.pyo
+*.pyd
+*.pyc
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === EXCLUDE VIRTUAL ENVS INSIDE SERVICES ===
+*/**/venv/
+*/**/.venv/
+*/**/env/
+*/**/Lib/
+*/**/lib/
+*/**/__pypackages__/
+
+# === FASTAPI / FLASK ===
+instance/
+.pytest_cache/
+.mypy_cache/
+.cache/
+*.db
+*.sqlite3
+
+# === OS / EDITOR FILES ===
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+.idea/
+*.iml
+.vscode/
+
+# === DOCKER ===
+docker-compose.override.yml
+docker-compose.debug.yml
+Dockerfile.*
+.docker/
+.dockerignore
+*.pid
+
+# === TEST / COVERAGE ===
+.coverage
+htmlcov/
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# === VSCODE DEV CONTAINERS ===
+.devcontainer/
+
+# === SYSTEM FILES ===
+*.tmp
+*.temp
+*.log
+
+extracttext-service/keys/
