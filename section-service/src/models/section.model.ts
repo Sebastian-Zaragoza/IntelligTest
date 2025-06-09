@@ -24,10 +24,6 @@ export const SectionSchema = new Schema({
         required: true,
         trim: true,
     },
-    notes:{
-        type: String,
-        default: null
-    },
     owner:{
         type: String,
         required: true,

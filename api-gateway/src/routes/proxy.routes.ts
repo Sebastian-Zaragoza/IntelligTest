@@ -51,4 +51,31 @@ const notesProxyConfig: ProxyOptions = {
 };
 
 router.use("/api/notes", authenticate, createProxyMiddleware(notesProxyConfig));
+
+const testProxyConfig: ProxyOptions = {
+    target: "http://test-service:4003",
+    changeOrigin: true,
+    pathRewrite: {
+        "^/api/notes": "/api/notes",
+    },
+    onProxyReq: (proxyReq, req) => {
+        const userId = req.headers["x-user-id"];
+        if (userId) {
+            proxyReq.setHeader("x-user-id", userId);
+        }
+        const contentType = req.headers["content-type"] || "";
+        if (
+            req.body &&
+            typeof req.body === "object" &&
+            !contentType.includes("multipart/form-data")
+        ) {
+            const bodyData = JSON.stringify(req.body);
+            proxyReq.setHeader("Content-Type", "application/json");
+            proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+        }
+    }
+};
+
+router.use("/api/test", authenticate, createProxyMiddleware(testProxyConfig));
 export default router;

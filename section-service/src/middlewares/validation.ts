@@ -7,5 +7,5 @@ export const handleInputErrors: RequestHandler = (req: Request, res: Response, n
         res.status(400).json({errors: errors.array()})
         return
     }
-    next()
+    next();
 }

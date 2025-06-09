@@ -6,17 +6,21 @@ from prompt_template import SYSTEM_PROMPT
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+
 def parse_questions_answers(response_text: str):
-    items = response_text.strip().split("/")
-    questions_answers = []
-    for i in range(0, len(items), 2):
-        question = items[i].strip()
-        answer = items[i+1].strip()
-        questions_answers.append({
-            "question": question,
-            "answer": answer
+    qas = []
+    paragraphs = response_text.split("\n")
+    for para in paragraphs:
+        text = para.strip()
+        if not text:
+            continue
+        question, answer = text.split("/", 1)  # solo una vez
+        qas.append({
+            "question": question.strip(),
+            "answer": answer.strip()
         })
-    return questions_answers
+    return qas
+
 
 def generate_test(user_input: str):
     response = client.chat.completions.create(

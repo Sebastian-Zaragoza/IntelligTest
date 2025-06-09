@@ -43,6 +43,15 @@ services:
       - ./notes-service/.env
     depends_on:
       - mongo
+  test-service:
+    build: ./test-service
+    container_name: test-service
+    ports:
+      - "4003:4003"
+    env_file:
+      - ./test-service/.env
+    depends_on:
+      - mongo
   extracttext-service:
     build: ./extracttext-service
     container_name: extracttext-service
