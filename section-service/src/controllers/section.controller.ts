@@ -109,6 +109,12 @@ export const deleteSection = async (req: Request, res: Response) => {
                 Authorization: owner
             }
         })
+        await axios.delete(`http://test-service:4003/api/test/${req.params.id}/test`,{
+            headers: {
+                "x-user-id":owner,
+                Authorization: owner
+            }
+        })
         await Section.findByIdAndDelete(section)
         res.status(200).json("Section deleted successfully");
     }catch(error){

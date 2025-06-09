@@ -36,3 +36,53 @@ export const generateTest = async (req: Request, res: Response) => {
         res.status(500).json({error:"Test failed with error"});
     }
 }
+
+export const evaluateTest = async (req: Request, res: Response) => {
+    try {
+        const sectionId = req.params.sectionId;
+        const { strict, ...userAnswers } = req.body;
+        const test = await Test.findOne({sectionId});
+        if (!test) {
+            res.status(404).json({ error: "Test not found" });
+            return;
+        }
+        const { questions, answers } = test;
+        const testEvaluation = questions.map((question, index) => {
+            const correctAnswer = answers[index];
+            const answerKey = `answer_${index}`;
+            const userAnswer = userAnswers[answerKey];
+            return {
+                question,
+                answer: correctAnswer,
+                user_answer: userAnswer
+            };
+        });
+        const finalBody = {
+            strict_mode: strict,
+            test: testEvaluation
+        };
+        const results = await axios.post(`http://evaluatetest-service:5002/api/gpt/evaluate`, finalBody)
+        res.status(200).json(results.data);
+    } catch (error) {
+        res.status(500).json({ error: "Test evaluation failed" });
+    }
+};
+
+export const deleteTest = async (req: Request, res: Response) => {
+    try{
+        const sectionId = req.params.sectionId;
+        if(!sectionId){
+            res.status(404).send({error: "Section is empty"})
+            return
+        }
+        const test = await Test.findOne({sectionId})
+        if(test){
+            await test.deleteOne()
+            res.status(200).json("Test deleted successfully")
+        }
+        res.status(200)
+    }catch(error){
+        res.status(500).json({ error: "Error deleting test" });
+    }
+
+}

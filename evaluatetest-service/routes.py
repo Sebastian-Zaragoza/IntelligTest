@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from schemas import GPTEvaluateRequest
 from openai_client import evaluate_test
-from typing import List
 
 router = APIRouter()
 

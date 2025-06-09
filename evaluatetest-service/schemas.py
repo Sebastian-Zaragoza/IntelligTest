@@ -8,4 +8,4 @@ class QuestionItem(BaseModel):
 
 class GPTEvaluateRequest(BaseModel):
     strict_mode: str
-    questions: List[QuestionItem]
+    test: List[QuestionItem]

@@ -1,7 +1,7 @@
 import {Router} from "express";
-import {param} from "express-validator";
+import {param, body} from "express-validator";
 import {handleInputErrors} from "../middlewares/validation";
-import {generateTest} from "../controllers/test.controller";
+import {deleteTest, evaluateTest, generateTest} from "../controllers/test.controller";
 
 const router = Router();
 router.get("/:sectionId/generate-test",
@@ -9,6 +9,36 @@ router.get("/:sectionId/generate-test",
         .notEmpty().withMessage("SectionId is required"),
     handleInputErrors,
     generateTest
+)
+router.post("/:sectionId/evaluate-test",
+    param("sectionId")
+        .notEmpty().withMessage("SectionId is required"),
+    body("strict")
+        .notEmpty().withMessage("Strict mode is required"),
+    body().custom((body) => {
+        const keys = Object.keys(body);
+        const answerKeys = keys.filter(k => /^answer_\d+$/.test(k));
+
+        if (answerKeys.length === 0) {
+            throw new Error("No answers provided");
+        }
+
+        for (const key of answerKeys) {
+            const value = body[key];
+            if (typeof value !== 'string' || value.trim() === "") {
+                throw new Error(`Answer for ${key} must be a non-empty string`);
+            }
+        }
+        return true;
+    }),
+    handleInputErrors,
+    evaluateTest
+)
+router.delete("/:sectionId/test",
+    param("sectionId")
+        .notEmpty().withMessage("SectionId is required"),
+    handleInputErrors,
+    deleteTest
 )
 
 export default router;

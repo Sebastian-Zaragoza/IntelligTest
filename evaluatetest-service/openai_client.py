@@ -17,7 +17,7 @@ def parse_feedback(response_text: str):
 
 def format_for_grading(data):
     output = f"{data.strict_mode}\n"
-    for item in data.questions:
+    for item in data.test:
         output += f"Question: {item.question}\n"
         output += f"Correct Answer: {item.answer}\n"
         output += f"User Answer: {item.user_answer}\n\n"
