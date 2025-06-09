@@ -6,7 +6,7 @@ import {
     createAccount,
     forgetPassword,
     loginAccount,
-    requestToken, updatePassword, validateToken
+    requestToken, updatePassword, userAuthenticate, validateToken
 } from "../controllers/auth.controller";
 
 const router = Router()
@@ -80,4 +80,8 @@ router.post('/update-password/:token',
     handleInputErrors,
     updatePassword
 )
+router.get('/user',
+    userAuthenticate
+)
+
 export default router

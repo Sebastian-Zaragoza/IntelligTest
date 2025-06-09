@@ -14,3 +14,12 @@ export type ConfirmToken = Pick<Auth, 'token'>
 export type RequestNewToken = Pick<Auth, 'email'>
 export type RequestNewTokenForgetPassword = Pick<Auth, 'email'>
 export type NewPasswordResetForm = Pick<Auth, 'password' | 'confirmPassword'>
+
+export const userSchema = authSchema.pick({
+    name: true,
+    email: true,
+}).extend({
+    _id: z.string()
+})
+
+export type User = z.infer<typeof userSchema>

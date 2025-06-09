@@ -21,7 +21,6 @@ export const createSection = async(req: Request, res: Response) => {
 export const getSection = async (req: Request, res: Response) => {
     try{
         const owner = req.headers["x-user-id"] as string;
-        console.log(owner)
         const sections = await Section.find({owner: owner})
         res.status(200).json(sections);
     }catch(error){

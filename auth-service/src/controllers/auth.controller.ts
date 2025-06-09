@@ -1,10 +1,12 @@
 import {Response, Request} from "express";
-import User, {IUser} from "../models/user.model";
+import User, {IUser, UsersSchema} from "../models/user.model";
 import {checkPassword, hashPassword} from "../utils/auth";
 import {generateToken} from "../utils/token";
 import Token, {IToken} from "../models/token.model";
 import {AuthEmails} from "../emails/authEmails";
 import {generateJWT} from "../utils/jwt";
+import {userSchema} from "../types/authSchema";
+
 
 type sendEmailProps = {
     user: IUser
@@ -200,3 +202,32 @@ export const updatePassword = async (req: Request, res: Response) => {
         res.status(500).json({error: "Internal server error"})
     }
 }
+
+export const userAuthenticate = async (req: Request, res: Response) => {
+    try{
+        const raw = req.headers["x-user-id"];
+        let userId: string;
+        if (Array.isArray(raw)) {
+            userId = raw[0];
+        } else if (typeof raw === "string") {
+            userId = raw;
+        } else {
+            res.status(401).json({ error: "Missing header" });
+            return;
+        }
+        const data = await User.findById(userId);
+        if(!data){
+            res.status(404).json({ error: "User not found" });
+            return;
+        }
+        const response = userSchema.safeParse(data);
+        if (response.success){
+            res.status(200).json(response.data);
+        }else{
+            res.status(400).json({ error: "Invalid user data" });
+        }
+    }catch(error){
+        res.status(500).json({error: "Internal server error"})
+    }
+};
+

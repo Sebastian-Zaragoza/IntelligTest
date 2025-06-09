@@ -10,7 +10,7 @@ import type {
 
 export async function createAccount(formData: UserRegisterForm){
     try {
-        const url = '/auth/create-account'
+        const url = 'http://localhost:4001/api/auth/create-account'
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -22,7 +22,7 @@ export async function createAccount(formData: UserRegisterForm){
 
 export async function confirmAccount(formData: ConfirmToken){
     try{
-        const url = '/auth/confirm-account'
+        const url = 'http://localhost:4001/api/auth/confirm-account'
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -34,7 +34,7 @@ export async function confirmAccount(formData: ConfirmToken){
 
 export async function requestNewCode(formData: RequestNewToken){
     try{
-        const url = '/auth/request-token'
+        const url = 'http://localhost:4001/api/auth/request-token'
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -46,9 +46,9 @@ export async function requestNewCode(formData: RequestNewToken){
 
 export async function loginAccount(formData: UserLoginForm){
     try{
-        const url = '/auth/login'
+        const url = 'http://localhost:4001/api/auth/login'
         const {data} = await api.post<string>(url, formData)
-        localStorage.setItem('DevFlowAuthToken', data)
+        localStorage.setItem('IntelligTestToken', data)
     }catch(error){
         if(isAxiosError(error) && error.response){
             throw new Error(error.response.data.error);
@@ -58,7 +58,7 @@ export async function loginAccount(formData: UserLoginForm){
 
 export async function forgetPassword(formData: RequestNewTokenForgetPassword){
     try{
-        const url = '/auth/forget-password'
+        const url = 'http://localhost:4001/api/auth/forget-password'
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -70,7 +70,7 @@ export async function forgetPassword(formData: RequestNewTokenForgetPassword){
 
 export async function validateToken(formData: ConfirmToken){
     try {
-        const url = '/auth/validate-token'
+        const url = 'http://localhost:4001/api/auth/validate-token'
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -82,7 +82,7 @@ export async function validateToken(formData: ConfirmToken){
 
 export async function updatePasswordWithToken({formData, token}:{formData: NewPasswordResetForm, token: ConfirmToken['token']}){
     try{
-        const url = `/auth/update-password/${token}`
+        const url = `http://localhost:4001/api/auth/update-password/${token}`
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -91,3 +91,4 @@ export async function updatePasswordWithToken({formData, token}:{formData: NewPa
         }
     }
 }
+

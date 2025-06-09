@@ -73,5 +73,16 @@ services:
       - "5002:5002"
     env_file:
       - ./evaluatetest-service/.env
+  user-interface:
+    build:
+      context: ./user-interface
+      dockerfile: Dockerfile
+    container_name: user-interface
+    ports:
+      - "5173:80"
+    env_file:
+      - ./user-interface/.env.local
+    depends_on:
+      - api-gateway
 volumes:
   mongo_data:

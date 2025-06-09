@@ -25,6 +25,27 @@ const sectionProxyConfig: ProxyOptions = {
 };
 router.use("/api/sections", authenticate, createProxyMiddleware(sectionProxyConfig));
 
+const userProxyConfig: ProxyOptions = {
+    target: "http://auth-service:4001",
+    changeOrigin: true,
+    pathRewrite: {
+        "^/api/auth/user": "/api/auth/user",
+    },
+    onProxyReq: (proxyReq, req) => {
+        const userId = req.headers["x-user-id"];
+        if (userId) {
+            proxyReq.setHeader("x-user-id", userId);
+        }
+        if (req.body && typeof req.body === 'object') {
+            const bodyData = JSON.stringify(req.body);
+            proxyReq.setHeader('Content-Type', 'application/json');
+            proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+        }
+    }
+};
+router.use("/api/auth/user", authenticate, createProxyMiddleware(userProxyConfig));
+
 const notesProxyConfig: ProxyOptions = {
     target: "http://notes-service:4002",
     changeOrigin: true,

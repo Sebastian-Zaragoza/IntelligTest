@@ -39,7 +39,6 @@ export default function RegisterUI(){
         onSuccess: (data) => {
             toast(data,{
                 className: 'font-semibold',
-                description: "Confirm your account checking your email",
                 duration: 7000,
                 icon: <MyIcon/>
             })

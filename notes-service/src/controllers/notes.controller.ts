@@ -30,6 +30,10 @@ export const uploadNotes = async (req: Request, res: Response) => {
     try{
         const response = await sendToExtractTextService(imagePath);
         const notes = response.notes;
+        const previous_note = await Note.findOne({section})
+        if (previous_note){
+            await previous_note.deleteOne();
+        }
         const newNote = new Note({
             notes,
             section,

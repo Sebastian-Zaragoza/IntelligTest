@@ -8,6 +8,8 @@ import ConfirmAccountView from "./src/views/auth/ConfirmAccountView.tsx";
 import RequestCodeView from "./src/views/auth/RequestCodeView.tsx";
 import ForgetPasswordView from "./src/views/auth/ForgetPasswordView.tsx";
 import NewPasswordView from "./src/views/auth/NewPasswordView.tsx";
+import UploadNotes from "./src/components/notes/UploadNotes.tsx";
+import UpdateNotes from "./src/components/notes/UpdateNotes.tsx";
 
 export default function Router() {
     return (
@@ -15,6 +17,8 @@ export default function Router() {
             <Routes>
                 <Route element={<SectionLayout/>}>
                     <Route path="/" element={<SectionView/>}/>
+                    <Route path="/:sectionId/upload" element={<UploadNotes/>}/>
+                    <Route path="/:sectionId/notes" element={<UpdateNotes/>}/>
                 </Route>
             </Routes>
             <Routes>
