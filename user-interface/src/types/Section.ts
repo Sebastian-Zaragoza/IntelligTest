@@ -20,4 +20,3 @@ export const sectionViewSchema = z.array(
 )
 
 export type Section = z.infer<typeof sectionSchema>
-export type SectionFormData = Pick<Section, 'name' | 'description' | 'subject'>

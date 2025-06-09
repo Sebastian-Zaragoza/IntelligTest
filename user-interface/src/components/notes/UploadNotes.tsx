@@ -26,7 +26,7 @@ export default function UploadNotes() {
             toast.success("Read the notes extracted and update it");
             setFile(null);
             setLoading(false);
-            navigate(`/${sectionId}/notes`)
+            navigate(`/sections/${sectionId}/notes`)
         }
     })
 

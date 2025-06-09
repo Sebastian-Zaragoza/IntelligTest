@@ -2,16 +2,18 @@ import {Outlet } from "react-router";
 import {Toaster} from "sonner";
 import Logo from "../components/Logo.tsx";
 import NavMenu from "../components/section/NavMenu.tsx";
+import {useAuth} from "../hooks/useAuth.ts";
+import {Navigate} from "react-router";
 
 
 export default function SectionLayout() {
-    /**const { isError, isLoading, data } = useAuth();
+    const { isError, isLoading, data } = useAuth();
     if (isLoading) {
         return <div className="bg-gray-800 min-h-screen" />;
     }
     if (isError || !data) {
         return <Navigate to="/auth/login" replace />;
-    }**/
+    }
     return (
         <>
             <header className="bg-gray-800">

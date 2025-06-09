@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 import SectionLayout from "./src/layouts/SectionLayout.tsx";
 import SectionView from "./src/views/SectionView.tsx";
 import LoginUI from "./src/views/auth/LoginView.tsx";
@@ -16,9 +16,9 @@ export default function Router() {
         <BrowserRouter>
             <Routes>
                 <Route element={<SectionLayout/>}>
-                    <Route path="/" element={<SectionView/>}/>
-                    <Route path="/:sectionId/upload" element={<UploadNotes/>}/>
-                    <Route path="/:sectionId/notes" element={<UpdateNotes/>}/>
+                    <Route path="/" element={<SectionView/>} index></Route>
+                    <Route path="/sections/:sectionId/upload" element={<UploadNotes/>}/>
+                    <Route path="/sections/:sectionId/notes" element={<UpdateNotes/>}/>
                 </Route>
             </Routes>
             <Routes>

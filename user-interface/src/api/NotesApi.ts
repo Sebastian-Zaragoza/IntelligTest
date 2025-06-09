@@ -1,5 +1,7 @@
 import api from "../lib/axios";
 import axios from "axios";
+import {notesSchema} from "../types/Notes.ts";
+
 
 export async function uploadNote(
     sectionId: string,
@@ -18,5 +20,22 @@ export async function uploadNote(
             throw new Error(serverMsg);
         }
         throw new Error("Error occurred while uploading file");
+    }
+}
+
+
+export async function getNotes(sectionId: string){
+    try {
+        const {data} = await api.get(`/api/notes/${sectionId}/notes`);
+        const response = notesSchema.safeParse(data);
+        if (!response.success){
+            throw new Error("Error occurred while getting notes");
+        }
+        return response.data;
+    }catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+            throw new Error(err.response?.data?.error || err.message);
+        }
+        throw new Error("Error occurred while getting notes");
     }
 }
