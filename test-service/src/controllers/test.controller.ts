@@ -14,6 +14,10 @@ export const generateTest = async (req: Request, res: Response) => {
             return;
         }
         const section = req.params.sectionId;
+        const previous_one = await Test.findOne({section})
+        if(previous_one){
+            await previous_one.deleteOne();
+        }
         const {data} = await axios.get(`http://notes-service:4002/api/notes/${section}/notes`, {
             headers:{
                 "x-user-id": owner,
