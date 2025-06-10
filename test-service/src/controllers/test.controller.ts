@@ -31,7 +31,7 @@ export const generateTest = async (req: Request, res: Response) => {
             answers: answersArray
         })
         await generated_test.save();
-        res.status(200).send('Test generated successfully');
+        res.status(200).send({questions: questionsArray, answers: answersArray});
     }catch(error){
         res.status(500).json({error:"Test failed with error"});
     }

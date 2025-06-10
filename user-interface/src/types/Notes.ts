@@ -6,5 +6,5 @@ export const notesSchema = z.object({
     section: z.string(),
     owner: z.string()
 })
-
+export const updateNoteResponseSchema = z.string();
 export type Notes = z.infer<typeof notesSchema>

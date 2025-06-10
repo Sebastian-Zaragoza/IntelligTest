@@ -1,7 +1,7 @@
 import api from "../lib/axios";
 import axios from "axios";
-import {notesSchema} from "../types/Notes.ts";
-
+import {notesSchema, updateNoteResponseSchema} from "../types/Notes.ts";
+import {isAxiosError} from "axios";
 
 export async function uploadNote(
     sectionId: string,
@@ -37,5 +37,20 @@ export async function getNotes(sectionId: string){
             throw new Error(err.response?.data?.error || err.message);
         }
         throw new Error("Error occurred while getting notes");
+    }
+}
+
+export async function updateNotes(sectionId: string, noteId: string, notes: string):Promise<string> {
+    try{
+        const {data} = await api.put<string>(`/api/notes/${sectionId}/notes/${noteId}`, {notes: notes});
+        const response = updateNoteResponseSchema.safeParse(data);
+        console.log(response.success);
+        if (!response.success){
+            throw new Error("Error occurred while updating note");
+        }
+        return response.data;
+    }catch(err){
+        isAxiosError(err) && console.error(isAxiosError(err));
+        throw new Error("Error occurred while updating notes");
     }
 }

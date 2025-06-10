@@ -10,6 +10,7 @@ import ForgetPasswordView from "./src/views/auth/ForgetPasswordView.tsx";
 import NewPasswordView from "./src/views/auth/NewPasswordView.tsx";
 import UploadNotes from "./src/components/notes/UploadNotes.tsx";
 import UpdateNotes from "./src/components/notes/UpdateNotes.tsx";
+import GenerateTest from "./src/components/notes/GenerateTest.tsx";
 
 export default function Router() {
     return (
@@ -19,6 +20,7 @@ export default function Router() {
                     <Route path="/" element={<SectionView/>} index></Route>
                     <Route path="/sections/:sectionId/upload" element={<UploadNotes/>}/>
                     <Route path="/sections/:sectionId/notes" element={<UpdateNotes/>}/>
+                    <Route path="/sections/:sectionId/generate-test" element={<GenerateTest/>}/>
                 </Route>
             </Routes>
             <Routes>
