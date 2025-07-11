@@ -1,4 +1,4 @@
-# 🧠 IntelligTest
+# 🔍 Overview
 
 **IntelligTest** is a full-stack, AI-powered exam generator designed to help students convert their handwritten or digital notes into customized tests. It leverages **Google Vision AI** for text extraction and a **Custom GPT model** for question generation, all wrapped in a modern microservices-based architecture.
 
@@ -73,8 +73,11 @@ docker-compose up --build
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+MIT © Sebastian Zaragoza
 
----
 
-> Created with ❤️ by [Sebastian Zaragoza](https://github.com/Sebastian-Zaragoza)
+## 📫 Contact
+
+👤 **Sebastian Zaragoza**  
+🔗 GitHub: https://github.com/Sebastian-Zaragoza  
+✉️ Email: your.email@example.com
