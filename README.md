@@ -1,5 +1,3 @@
-## IntelligTest: AI-Powered Exam Generator
-
 ## Overview
 
 IntelligTest is a full-stack web application that leverages artificial intelligence to transform student notes into personalized exams. By integrating advanced technologies like Google Cloud Vision for text extraction and OpenAI's GPT for question generation, the platform streamlines the process of creating, taking, and evaluating tests. Designed with a microservices architecture, it ensures scalability, maintainability, and separation of concerns, making it suitable for educational environments. The application includes secure authentication, a responsive user interface, and containerization for easy deployment.
