@@ -1,4 +1,4 @@
-# IntelligTest: AI-Powered Exam Generator
+## IntelligTest: AI-Powered Exam Generator
 
 ## Overview
 
