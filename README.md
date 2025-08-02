@@ -264,10 +264,6 @@ IntelligTest/
 
 All interactions route through the API Gateway for security.
 
-## Contributing
-
-Contributions welcome! Fork the repo, create a branch, commit changes, and submit a Pull Request. Follow coding standards and add tests.
-
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
