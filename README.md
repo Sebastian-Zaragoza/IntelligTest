@@ -294,6 +294,6 @@ MIT License. See [LICENSE](LICENSE) for details.
 
 ## Contact
 
-For inquiries, contact Sebastian Zaragoza via GitHub or email (sebastian.zaragoza@example.com).
+For inquiries, contact Sebastian Zaragoza via GitHub or email (galindozaragozasebastian@gmail.com).
 
 Thank you for exploring IntelligTest! 📚✨
