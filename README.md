@@ -1,9 +1,35 @@
 ## Overview
+IntelligTest is a cutting-edge, full-stack AI-powered platform designed to revolutionize educational assessment by transforming student notes into personalized, automated exams. Leveraging advanced technologies such as Google Cloud Vision for precise text extraction and OpenAI's GPT for intelligent question generation, this microservices-based application streamlines the entire workflow—from note uploading and test creation to secure evaluation and feedback. Built with scalability in mind, it features a modular architecture that ensures maintainability, robust JWT authentication for user security, and Docker containerization for seamless deployment. Ideal for educators and institutions, IntelligTest not only saves time but also enhances learning outcomes through flexible evaluation modes (strict and semantic). This project demonstrates expertise in AI integration, microservices design, full-stack development (React frontend with Node.js/Express backend), DevOps practices, and cloud services—making it a standout addition to any portfolio for roles in software engineering, AI, or edtech innovation
 
-IntelligTest is a full-stack web application that leverages artificial intelligence to transform student notes into personalized exams. By integrating advanced technologies like Google Cloud Vision for text extraction and OpenAI's GPT for question generation, the platform streamlines the process of creating, taking, and evaluating tests. Designed with a microservices architecture, it ensures scalability, maintainability, and separation of concerns, making it suitable for educational environments. The application includes secure authentication, a responsive user interface, and containerization for easy deployment.
+## Demo Views
+Explore the core functionalities of the IntelligTest microservices system through these engaging animated demos. Each GIF highlights a specific feature, demonstrating how the platform streamlines authentication, orchestration, evaluation modes, and content extraction for an efficient and user-friendly experience.
+
+### Authentication Process
+This demo illustrates the seamless authentication workflow, enabling users to create accounts, log in securely, recover forgotten passwords, and reconfirm unverified accounts—all designed for accessibility and robust security.
+
+![Auth-IntelligTest](resources/Auth-IntelligTest.gif)
+
+### Docker Compose Orchestration
+Witness the efficient execution of Docker containers via Compose for rapid orchestration. This setup facilitates quick demos, with upcoming enhancements including UI refinements, unit testing, advanced security measures, migration from a custom API Gateway to AWS Cognito, and full-scale deployment using Kubernetes, Grafana, Prometheus, and other AWS services.
+
+![Compose-Execution](resources/Compose-Execution.gif)
+
+### Non-Strict Mode Evaluation
+Experience the flexible non-strict evaluation mode, where answers are deemed correct if they semantically align with the expected response, even without exact matches. In contrast, strict mode demands precise equivalence, offering versatility for varied assessment needs.
+
+![No-Strict-mode](resources/No-Strict-mode.gif)
+
+### Notes Extraction and Customization
+Discover how IntelligTest intelligently extracts key information from screenshots or photos of student notes. Users can then refine the extracted data before effortlessly generating automated tests, empowering educators with smart, customizable tools.
+
+![Notes-IntelligTest](resources/Notes-IntelligTest.gif)
+
+### Strict Mode Evaluation
+This demo showcases the rigorous strict evaluation mode, requiring answers to match expected responses verbatim for accuracy. Unlike non-strict mode's meaning-based flexibility, it ensures precision in high-stakes evaluations.
+
+![Strict-Mode](resources/Strict-Mode.gif)
 
 ## Features
-
 - **Note Upload and Text Extraction**: Upload images or screenshots of notes; extract text using Google Cloud Vision AI.
 - **AI-Driven Test Generation**: Generate customized questions from extracted notes via GPT.
 - **Test Taking and Evaluation**: Answer generated tests with options for strict or relaxed evaluation modes.
