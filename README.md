@@ -9,25 +9,25 @@ This demo illustrates the seamless authentication workflow, enabling users to cr
 
 ![Auth-IntelligTest](resources/Auth-IntelligTest.gif)
 
-### Docker Compose Orchestration
-Witness the efficient execution of Docker containers via Compose for rapid orchestration. This setup facilitates quick demos, with upcoming enhancements including UI refinements, unit testing, advanced security measures, migration from a custom API Gateway to AWS Cognito, and full-scale deployment using Kubernetes, Grafana, Prometheus, and other AWS services.
+### Notes Extraction and Customization
+Discover how IntelligTest intelligently extracts key information from screenshots or photos of student notes. Users can then refine the extracted data before effortlessly generating automated tests, empowering educators with smart, customizable tools.
 
-![Compose-Execution](resources/Compose-Execution.gif)
+![Notes-IntelligTest](resources/Notes-IntelligTest.gif)
 
 ### Non-Strict Mode Evaluation
 Experience the flexible non-strict evaluation mode, where answers are deemed correct if they semantically align with the expected response, even without exact matches. In contrast, strict mode demands precise equivalence, offering versatility for varied assessment needs.
 
 ![No-Strict-mode](resources/No-Strict-mode.gif)
 
-### Notes Extraction and Customization
-Discover how IntelligTest intelligently extracts key information from screenshots or photos of student notes. Users can then refine the extracted data before effortlessly generating automated tests, empowering educators with smart, customizable tools.
-
-![Notes-IntelligTest](resources/Notes-IntelligTest.gif)
-
 ### Strict Mode Evaluation
 This demo showcases the rigorous strict evaluation mode, requiring answers to match expected responses verbatim for accuracy. Unlike non-strict mode's meaning-based flexibility, it ensures precision in high-stakes evaluations.
 
 ![Strict-Mode](resources/Strict-Mode.gif)
+
+### Docker Compose Orchestration
+Witness the efficient execution of Docker containers via Compose for rapid orchestration. This setup facilitates quick demos, with upcoming enhancements including UI refinements, unit testing, advanced security measures, migration from a custom API Gateway to AWS Cognito, and full-scale deployment using Kubernetes, Grafana, Prometheus, and other AWS services.
+
+![Compose-Execution](resources/Compose-Execution.gif)
 
 ## Features
 - **Note Upload and Text Extraction**: Upload images or screenshots of notes; extract text using Google Cloud Vision AI.
