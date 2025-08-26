@@ -23,72 +23,93 @@ function DashboardView() {
     })**/
     if(isLoading)return
     if (data) return (
-        <>
-            <h1 className="text-5xl font-black">My sections</h1>
-            <p className="text-2xl font-light text-gray-500 mt-5">Manage your notes by sections</p>
-
-            <nav className="my-5">
-                <Link className="bg-gray-700 hover:bg-gray-800 px-10 py-3 text-white text-xl font-bold
-            cursor-pointer transition-colors" to='/sections/create'>
+        <div className="max-w-screen-2xl mx-auto w-full space-y-8 px-8">
+            <div className="flex items-center justify-between">
+                <div>
+                    <h1 className="text-3xl font-bold text-gray-900">My sections</h1>
+                    <p className="mt-1 text-gray-500">Manage your notes by sections</p>
+                </div>
+                <Link
+                    to="/sections/create"
+                    className="bg-gray-600 hover:bg-gray-700 text-white font-semibold
+                   px-5 py-2 rounded-lg shadow-sm transition"
+                >
                     New Section
                 </Link>
-            </nav>
-            {data?.length > 0 ? (
-                <ul role="list" className="divide-y divide-gray-100 border border-gray-100 mt-10 bg-white shadow-lg">
+            </div>
+
+            {data.length > 0 ? (
+                <ul
+                    role="list"
+                    className="grid w-full gap-6
+                   sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                >
                     {data.map((section) => (
-                        <li key={section._id} className="flex justify-between gap-x-6 px-5 py-10">
-                            <div className="flex min-w-0 gap-x-4">
-                                <div className="min-w-0 flex-auto space-y-2">
-                                    <Link to={`/sections/${section._id}/upload`}
-                                          className="text-gray-600 cursor-pointer hover:underline text-3xl font-bold"
-                                    >{section.name}</Link>
-                                    <p className="text-sm text-gray-400">
-                                        Description: {section.description}
-                                    </p>
-                                    <p className="text-sm text-gray-400">
-                                        {section.subject}
-                                    </p>
-                                </div>
+                        <li
+                            key={section._id}
+                            className="flex flex-col justify-between bg-white rounded-lg shadow
+                       p-6 hover:shadow-lg transition w-full"
+                        >
+                            <div>
+                                <Link
+                                    to={`/sections/${section._id}/upload`}
+                                    className="block text-xl font-semibold text-gray-800 hover:text-gray-900"
+                                >
+                                    {section.name}
+                                </Link>
+                                <p className="mt-2 text-gray-600 text-sm">{section.description}</p>
+                                <p className="mt-1 text-gray-500 text-xs">{section.subject}</p>
                             </div>
-                            <div className="flex shrink-0 items-center gap-x-6">
-                                <Menu as="div" className="relative flex-none">
-                                    <Menu.Button className="-m-2.5 block p-2.5 text-gray-500 hover:text-gray-900">
+
+                            <div className="mt-4 flex justify-end">
+                                <Menu as="div" className="relative">
+                                    <Menu.Button
+                                        className="p-2 rounded-full text-gray-500 hover:text-gray-900
+                             hover:bg-gray-100 transition"
+                                    >
                                         <span className="sr-only">Options</span>
-                                        <EllipsisVerticalIcon className="h-9 w-9" aria-hidden="true" />
+                                        <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                                     </Menu.Button>
-                                    <Transition as={Fragment} enter="transition ease-out duration-100"
-                                                enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100"
-                                                leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100"
-                                                leaveTo="transform opacity-0 scale-95">
-                                        <Menu.Items
-                                            className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-                                        >
+                                    <Transition
+                                        as={Fragment}
+                                        enter="transition ease-out duration-100"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <Menu.Items className="absolute right-0 mt-2 w-40 rounded-md bg-white
+                                         shadow-lg ring-1 ring-black/5 focus:outline-none">
+                                            {[
+                                                { label: 'Update Notes', to: `/sections/${section._id}/upload` },
+                                                { label: 'View Test',   to: `#` },
+                                                { label: 'Edit Section', to: `/projects/${section._id}/edit` },
+                                            ].map((item) => (
+                                                <Menu.Item key={item.label}>
+                                                    {({ active }) => (
+                                                        <Link
+                                                            to={item.to}
+                                                            className={`block px-4 py-2 text-sm ${
+                                                                active ? 'bg-gray-100' : ''
+                                                            }`}
+                                                        >
+                                                            {item.label}
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            ))}
                                             <Menu.Item>
-                                                <Link to={`/sections/${section._id}/upload`}
-                                                      className='block px-3 py-1 text-sm leading-6 text-gray-900'>
-                                                    Update Notes
-                                                </Link>
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                <Link to={``}
-                                                      className='block px-3 py-1 text-sm leading-6 text-gray-900'>
-                                                    View Test
-                                                </Link>
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                <Link to={`/projects/${section._id}/edit`}
-                                                      className='block px-3 py-1 text-sm leading-6 text-gray-900'>
-                                                    Edit Section
-                                                </Link>
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                <button
-                                                    type='button'
-                                                    className='block px-3 py-1 text-sm leading-6 text-gray-800'
-                                                    /**onClick={() => mutate(project._id) }**/
-                                                >
-                                                    Delete Section
-                                                </button>
+                                                {({ active }) => (
+                                                    <button
+                                                        type="button"
+                                                        className={`w-full text-left px-4 py-2 text-sm ${
+                                                            active ? 'bg-gray-100' : ''
+                                                        }`}
+                                                    >
+                                                        Delete Section
+                                                    </button>
+                                                )}
                                             </Menu.Item>
                                         </Menu.Items>
                                     </Transition>
@@ -98,9 +119,11 @@ function DashboardView() {
                     ))}
                 </ul>
             ) : (
-                <p/>
+                <div className="py-10 text-center">
+                    <p className="text-gray-500">No sections yet. Click “New Section” to get started.</p>
+                </div>
             )}
-        </>
+        </div>
     );
 }
 export default DashboardView;

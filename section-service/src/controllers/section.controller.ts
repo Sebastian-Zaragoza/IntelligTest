@@ -85,7 +85,7 @@ export const updateSectionNote = async (req: Request, res: Response) => {
         await section.save();
         res.status(200).json("Section updated successfully");
     }catch(error){
-        console.error("UPDATE SECTION ERROR:", error);
+        console.error("Update section error:", error);
         res.status(500).json({error:"Something went wrong"});
     }
 }

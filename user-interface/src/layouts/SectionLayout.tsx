@@ -1,7 +1,7 @@
 import {Outlet } from "react-router";
 import {Toaster} from "sonner";
 import Logo from "../components/Logo.tsx";
-import NavMenu from "../components/section/NavMenu.tsx";
+import NavMenu from "../components/section/NavMenu.tsx"
 import {useAuth} from "../hooks/useAuth.ts";
 import {Navigate} from "react-router";
 
@@ -15,29 +15,33 @@ export default function SectionLayout() {
         return <Navigate to="/auth/login" replace />;
     }
     return (
-        <>
-            <header className="bg-gray-800">
-                <div className="max-w-screen-2xl mx-auto flex justify-between items-center px-20 py-4">
-                    <div className="flex justify-between items-center">
-                        <Logo/>
-                        <h1 className="text-center font-semibold text-white ">IntelligTest</h1>
+        <div className="min-h-screen bg-gray-800 flex flex-col">
+            {/* Header */}
+            <header className="bg-gray-800 shadow-md">
+                <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-4">
+                    <div className="flex items-center space-x-4">
+                        <Logo />
+                        <span className="text-xl font-semibold text-white">IntelligTest</span>
                     </div>
-                    <NavMenu name={"Zaragoza"} />
+                    <NavMenu name="Zaragoza" />
                 </div>
             </header>
 
-            <section className="max-w-screen-2xl mx-auto mt-10 px-20">
-                <Outlet />
-            </section>
+            <main className="flex-grow max-w-screen-2xl mx-auto px-8 py-10">
+                <div className="bg-white rounded-lg shadow-lg p-8">
+                    <Outlet />
+                </div>
+            </main>
 
-            <footer>
-                <div className="max-w-screen-2xl mx-auto px-20 py-5">
-                    <p className="text-center text-gray-600">
+            <footer className="py-4">
+                <div className="max-w-screen-2XL mx-auto px-8 text-center">
+                    <p className="text-sm text-gray-400">
                         All rights reserved {new Date().getFullYear()}
                     </p>
                 </div>
             </footer>
-            <Toaster/>
-        </>
+
+            <Toaster />
+        </div>
     );
 }

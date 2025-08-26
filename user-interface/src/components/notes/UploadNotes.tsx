@@ -54,41 +54,51 @@ export default function UploadNotes() {
     };
 
     return (
-        <div>
+        <div className="space-y-6 max-w-lg mx-auto">
             <div
                 onDragOver={onDragOver}
                 onDragLeave={onDragLeave}
                 onDrop={onDrop}
                 onClick={() => inputRef.current?.click()}
-                style={{
-                    border: "2px dashed #aaa",
-                    padding: "1rem",
-                    textAlign: "center",
-                    background: dragActive ? "#f0f0f0" : "#fff",
-                    cursor: "pointer",
-                }}
+                className={`
+        border-2 border-dashed border-gray-300 rounded-lg p-8 text-center
+        transition-colors cursor-pointer
+        ${dragActive ? 'bg-gray-50' : 'bg-white'}
+        hover:bg-gray-50
+      `}
             >
-                {file
-                    ? `Selected: ${file.name}`
-                    : "Drag and drop or click to select an image"}
                 <input
                     ref={inputRef}
                     type="file"
                     accept="image/*"
                     onChange={onChange}
-                    style={{ display: "none" }}
+                    className="hidden"
                 />
+                <p className="text-gray-600">
+                    {file
+                        ? `Selected: ${file.name}`
+                        : 'Drag & drop or click to select an image'}
+                </p>
             </div>
 
             <button
                 onClick={onClickUpload}
                 disabled={!file || loading}
-                style={{ marginTop: "1rem" }}
+                className="
+        w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold
+        px-6 py-2 rounded-lg shadow transition
+        disabled:opacity-50 disabled:cursor-not-allowed
+      "
             >
-                {loading ? "Uploading" : "Upload image"}
+                {loading ? 'Uploading…' : 'Upload Image'}
             </button>
 
-            {message && <p style={{ marginTop: "0.5rem" }}>{message}</p>}
+            {message && (
+                <p className="mt-2 text-sm text-gray-500">
+                    {message}
+                </p>
+            )}
         </div>
     );
+
 }

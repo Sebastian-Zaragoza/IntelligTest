@@ -2,6 +2,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 from prompt_template import SYSTEM_PROMPT
+from openai.types.chat import ChatCompletionSystemMessageParam, ChatCompletionUserMessageParam
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -28,8 +29,8 @@ def evaluate_test(data):
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": formatted}
+            ChatCompletionSystemMessageParam(role="system", content=SYSTEM_PROMPT),
+            ChatCompletionUserMessageParam(role="user", content=formatted),
         ],
         max_tokens=500,
         temperature=0.0

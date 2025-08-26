@@ -15,7 +15,7 @@ export default function GenerateTest() {
     const { sectionId } = useParams<{ sectionId: string }>();
     const navigate = useNavigate();
 
-    const { data, isLoading, isError } = useQuery<GeneratedTest>({
+    const { data, isLoading } = useQuery<GeneratedTest>({
         queryKey: ["test", sectionId],
         queryFn: () => generateTest(sectionId!),
         enabled: Boolean(sectionId),
@@ -53,50 +53,69 @@ export default function GenerateTest() {
         mutation.mutate(payload);
     };
 
-    if (isLoading) return <div>Loading…</div>;
-    if (isError || !data) return <p>Error loading test</p>;
 
     if (data) return (
-       <form className="p-4 max-w-2xl mx-auto space-y-6" onSubmit={handleSubmit(onSubmit)}>
-           <div className="flex items-center space-x-2">
-               <label className="font-medium">Strict mode:</label>
-               <button
-                   type="button"
-                   onClick={() => setStrictMode((prev) => !prev)}
-                   className={`px-3 py-1 rounded-lg ${
-                       strictMode ? "bg-green-600 text-white" : "bg-gray-300"
-                   }`}
-               >
-                   {strictMode ? "ON" : "OFF"}
-               </button>
-           </div>
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="
+      max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8
+      space-y-6
+    "
+        >
+            <div className="flex items-center space-x-3">
+                <label className="font-medium text-gray-800">Strict mode:</label>
+                <button
+                    type="button"
+                    onClick={() => setStrictMode(prev => !prev)}
+                    className={`
+          px-4 py-2 rounded-md font-semibold transition
+          ${strictMode
+                        ? 'bg-green-600 text-white'
+                        : 'bg-gray-300 text-gray-700'}
+        `}
+                >
+                    {strictMode ? 'ON' : 'OFF'}
+                </button>
+            </div>
 
-           {data.questions.map((question, index) => {
-               const fieldName = `answer_${index}` as const;
-               return (
-                   <div key={index} className="space-y-2">
-                       <p className="font-medium">{`${index + 1}. ${question}`}</p>
-                       <input
-                           type="text"
-                           placeholder=" "
-                           className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                           {...register(fieldName, {
-                               required: "Answer the question",
-                           })}
-                       />
-                       {errors[fieldName] && (
-                           <ErrorMessage>{errors[fieldName]?.message}</ErrorMessage>
-                       )}
-                   </div>
-               );
-           })}
-           <button
-               type="submit"
-               className="w-full py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-800 transition-colors"
-           >
-            Submit Test
-           </button>
-       </form>
+            {/* Questions */}
+            {data.questions.map((question, idx) => {
+                const name = `answer_${idx}` as const;
+                return (
+                    <div key={idx} className="space-y-2">
+                        <p className="text-gray-900 font-medium">
+                            {idx + 1}. {question}
+                        </p>
+                        <input
+                            {...register(name, { required: 'Answer the question' })}
+                            type="text"
+                            className="
+              w-full border border-gray-300 rounded-lg p-3
+              focus:outline-none focus:ring-2 focus:ring-gray-700
+              transition
+            "
+                            placeholder="Your answer..."
+                        />
+                        {errors[name] && (
+                            <ErrorMessage>{errors[name]?.message}</ErrorMessage>
+                        )}
+                    </div>
+                );
+            })}
+
+            {/* Submit */}
+            <button
+                type="submit"
+                className="
+        w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold
+        px-6 py-3 rounded-lg shadow transition
+        disabled:opacity-50 disabled:cursor-not-allowed
+      "
+            >
+                {isLoading ? 'Evaluating…' : 'Submit Test'}
+            </button>
+        </form>
     );
+
 }
 
