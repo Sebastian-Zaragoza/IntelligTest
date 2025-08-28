@@ -102,6 +102,7 @@ export const deleteSection = async (req: Request, res: Response) => {
             res.status(403).json({ error: "Access denied" });
             return
         }
+        /**
         await axios.delete(`http://notes-service:4002/api/notes/${req.params.id}/notes`,{
             headers: {
                 "x-user-id":owner,
@@ -113,7 +114,7 @@ export const deleteSection = async (req: Request, res: Response) => {
                 "x-user-id":owner,
                 Authorization: owner
             }
-        })
+        })**/
         await Section.findByIdAndDelete(section)
         res.status(200).json("Section deleted successfully");
     }catch(error){

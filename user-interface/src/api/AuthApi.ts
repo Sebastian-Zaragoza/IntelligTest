@@ -5,7 +5,7 @@ import type {
     RequestNewToken,
     UserRegisterForm,
     UserLoginForm,
-    RequestNewTokenForgetPassword, NewPasswordResetForm
+    RequestNewTokenForgetPassword, NewPasswordResetForm, CheckPasswordForm
 } from "../types/Auth.ts";
 
 export async function createAccount(formData: UserRegisterForm){
@@ -92,3 +92,14 @@ export async function updatePasswordWithToken({formData, token}:{formData: NewPa
     }
 }
 
+export async function checkPassword(formData: CheckPasswordForm){
+    try{
+        const url = '/auth/check-password';
+        const {data} = await api.post<string>(url, formData);
+        return data;
+    }catch(error){
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error);
+        }
+    }
+}

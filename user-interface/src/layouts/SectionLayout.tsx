@@ -16,7 +16,6 @@ export default function SectionLayout() {
     }
     return (
         <div className="min-h-screen bg-gray-800 flex flex-col">
-            {/* Header */}
             <header className="bg-gray-800 shadow-md">
                 <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-4">
                     <div className="flex items-center space-x-4">
@@ -40,8 +39,7 @@ export default function SectionLayout() {
                     </p>
                 </div>
             </footer>
-
-            <Toaster />
+            <Toaster/>
         </div>
     );
 }

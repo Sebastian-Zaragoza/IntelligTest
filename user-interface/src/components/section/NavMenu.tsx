@@ -2,7 +2,6 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import {
     ChevronDownIcon,
-    UserCircleIcon,
     DocumentTextIcon,
     ArrowRightOnRectangleIcon
 } from '@heroicons/react/24/outline';
@@ -20,9 +19,7 @@ export default function NavMenu({ name }: NavMenuProps) {
 
     return (
         <Menu as="div" className="relative inline-block text-left">
-            {/* Trigger: modern rectangular button */}
             <Menu.Button className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none transition">
-                <UserCircleIcon className="w-5 h-5" />
                 <span className="font-medium">{name}</span>
                 <ChevronDownIcon className="w-4 h-4" />
             </Menu.Button>
@@ -41,20 +38,7 @@ export default function NavMenu({ name }: NavMenuProps) {
                         <Menu.Item>
                             {({ active }) => (
                                 <Link
-                                    to="/profile"
-                                    className={`${
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800'
-                                    } flex items-center px-4 py-2 space-x-2 text-sm transition`}
-                                >
-                                    <UserCircleIcon className="w-5 h-5" />
-                                    <span>Profile</span>
-                                </Link>
-                            )}
-                        </Menu.Item>
-                        <Menu.Item>
-                            {({ active }) => (
-                                <Link
-                                    to="/sections"
+                                    to="/"
                                     className={`${
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-800'
                                     } flex items-center px-4 py-2 space-x-2 text-sm transition`}

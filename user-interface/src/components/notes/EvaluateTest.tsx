@@ -16,5 +16,4 @@ export default function EvaluateTest({ score, test }: EvaluateTestResult) {
             </ul>
         </div>
     );
-
 }

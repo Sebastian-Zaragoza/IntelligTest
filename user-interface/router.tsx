@@ -12,6 +12,8 @@ import UploadNotes from "./src/components/notes/UploadNotes.tsx";
 import UpdateNotes from "./src/components/notes/UpdateNotes.tsx";
 import GenerateTest from "./src/components/notes/GenerateTest.tsx";
 import EvaluateTestPage from "./src/components/notes/EvaluateTestPage.tsx";
+import CreateSectionView from "./src/views/section/CreateSectionView.tsx";
+import EditSectionView from "./src/views/section/EditSectionView.tsx";
 
 export default function Router() {
     return (
@@ -19,6 +21,8 @@ export default function Router() {
             <Routes>
                 <Route element={<SectionLayout/>}>
                     <Route path="/" element={<SectionView/>} index></Route>
+                    <Route path="/sections/create" element={<CreateSectionView/>} index></Route>
+                    <Route path="/sections/:sectionId/edit" element={<EditSectionView/>} index></Route>
                     <Route path="/sections/:sectionId/upload" element={<UploadNotes/>}/>
                     <Route path="/sections/:sectionId/notes" element={<UpdateNotes/>}/>
                     <Route path="/sections/:sectionId/generate-test" element={<GenerateTest/>}/>

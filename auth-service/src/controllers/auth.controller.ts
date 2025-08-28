@@ -231,3 +231,23 @@ export const userAuthenticate = async (req: Request, res: Response) => {
     }
 };
 
+
+export const checkPasswordUser = async (req: Request, res: Response) => {
+    try{
+        const {password} = req.body;
+        const user = await User.findById(req.body.id);
+        if (!user) {
+            res.status(404).json({ error: "User not found" });
+            return;
+        }
+        const isPasswordCorrect = await checkPassword(password, user.password);
+        if (!isPasswordCorrect) {
+            const error = new Error('The password is not correct');
+            res.status(401).json({ error: error.message });
+            return;
+        }
+        res.status(200).json('The password is correct');
+    }catch(error){
+        res.status(500).json({error: "Error checking password"})
+    }
+}

@@ -2,6 +2,7 @@ import {Router} from "express";
 import {param, body} from "express-validator";
 import {handleInputErrors} from "../middlewares/validation";
 import {
+    checkPasswordUser,
     confirmAccount,
     createAccount,
     forgetPassword,
@@ -84,4 +85,10 @@ router.get('/user',
     userAuthenticate
 )
 
-export default router
+router.post('/check-password',
+    body("password").notEmpty().withMessage("Password is required"),
+    handleInputErrors,
+    checkPasswordUser
+)
+
+export default router;

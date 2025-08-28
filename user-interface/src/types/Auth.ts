@@ -23,3 +23,4 @@ export const userSchema = authSchema.pick({
 })
 
 export type User = z.infer<typeof userSchema>
+export type CheckPasswordForm = Pick<Auth, "password">

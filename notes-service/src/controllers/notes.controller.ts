@@ -99,7 +99,7 @@ export const deleteNote = async (req: Request, res: Response) => {
        }
        const note = await Note.findOne({section})
        if(note){
-           await note.deleteOne()
+           await note.deleteOne();
            res.status(200).json("Note deleted successfully")
        }
        res.status(200)

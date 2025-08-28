@@ -5,7 +5,7 @@ export const sectionSchema = z.object({
     name: z.string(),
     description: z.string(),
     subject: z.string(),
-    notes: z.string(),
+    notes: z.string().optional(),
     owner: z.string(),
 })
 
@@ -16,7 +16,10 @@ export const sectionViewSchema = z.array(
         description: true,
         subject: true,
         owner: true,
+        notes: true,
     })
 )
 
 export type Section = z.infer<typeof sectionSchema>
+export type SectionFormData = Pick<Section, "name" | "subject" | "description">;
+

@@ -50,3 +50,15 @@ export async function evaluateTest(
     throw new Error("Error occurred while test server generating test");
     }
 }
+
+export async function getTest(sectionId: string) {
+    try {
+        const { data } = await api.get(`/api/test/${sectionId}/test`);
+        return data;
+    } catch (err) {
+        if (isAxiosError(err) && err.response?.status === 404) {
+            return null;
+        }
+        throw new Error("Error occurred while fetching test");
+    }
+}

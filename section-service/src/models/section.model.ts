@@ -4,7 +4,7 @@ export interface ISection extends Document {
     name:string;
     description:string;
     subject:string;
-    notes:string;
+    notes?:string;
     owner:string;
 }
 
@@ -23,6 +23,10 @@ export const SectionSchema = new Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    notes:{
+        type: String,
+        required: false,
     },
     owner:{
         type: String,

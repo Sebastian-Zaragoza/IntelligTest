@@ -1,7 +1,7 @@
 import {Router} from "express";
 import {param, body} from "express-validator";
 import {handleInputErrors} from "../middlewares/validation";
-import {deleteTest, evaluateTest, generateTest} from "../controllers/test.controller";
+import {deleteTest, evaluateTest, generateTest, getTestGenerated} from "../controllers/test.controller";
 
 const router = Router();
 router.get("/:sectionId/generate-test",
@@ -40,5 +40,10 @@ router.delete("/:sectionId/test",
     handleInputErrors,
     deleteTest
 )
-
+router.get("/:sectionId/test",
+    param("sectionId")
+    .notEmpty().withMessage("SectionId is required"),
+    handleInputErrors,
+    getTestGenerated
+)
 export default router;
