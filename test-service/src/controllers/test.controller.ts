@@ -14,9 +14,12 @@ export const generateTest = async (req: Request, res: Response) => {
             return;
         }
         const section = req.params.sectionId;
-        const previous_one = await Test.findOne({section})
+        const previous_one = await Test.findOne({sectionId: section})
         if(previous_one){
-            await previous_one.deleteOne();
+            const questions = previous_one.questions;
+            const answers = previous_one.answers;
+            res.status(200).send({questions: questions, answers: answers});
+            return;
         }
         const {data} = await axios.get(`http://notes-service:4002/api/notes/${section}/notes`, {
             headers:{
@@ -36,6 +39,7 @@ export const generateTest = async (req: Request, res: Response) => {
         })
         await generated_test.save();
         res.status(200).send({questions: questionsArray, answers: answersArray});
+        return;
     }catch(error){
         res.status(500).json({error:"Test failed with error"});
     }

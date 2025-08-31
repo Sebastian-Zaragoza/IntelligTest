@@ -98,7 +98,7 @@ const testProxyConfig: ProxyOptions = {
     target: "http://test-service:4003",
     changeOrigin: true,
     pathRewrite: {
-        "^/api/notes": "/api/notes",
+        "^/api/test": "/api/test",
     },
     onProxyReq: (proxyReq, req) => {
         const userId = req.headers["x-user-id"];

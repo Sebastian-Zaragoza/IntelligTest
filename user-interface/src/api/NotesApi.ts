@@ -34,9 +34,6 @@ export async function getNotes(sectionId: string){
         return response.data;
     }catch (err: unknown) {
         if (axios.isAxiosError(err)) {
-            if (err.response?.status === 404) {
-                return null;
-            }
             throw new Error(err.response?.data?.error || err.message);
         }
         throw new Error("Error occurred while getting notes");

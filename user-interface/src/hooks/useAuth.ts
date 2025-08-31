@@ -1,11 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
-import {getUser} from "../api/AuthApi.ts";
+import api from "../lib/axios.ts";
 
 export const useAuth = ()=>{
     const {isError, isLoading, data} = useQuery({
         queryKey: ['user'],
-        queryFn: getUser,
-        retry: 1,
+        queryFn: ()=>
+            api.get<{_id: string; name: string; email:string}>('/api/auth/user').then((res)=>res.data),
+        retry: false,
         refetchOnWindowFocus: false
     })
     return {isError, isLoading, data}

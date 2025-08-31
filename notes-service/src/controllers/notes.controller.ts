@@ -27,13 +27,29 @@ export const uploadNotes = async (req: Request, res: Response) => {
         res.status(400).send({error: "Missing data"})
         return
     }
+    try {
+        const testVerify = await axios.get(`http://test-service:4003/api/test/${section}/test`, {
+            headers: { "x-user-id": owner, Authorization: owner },
+            timeout: 5000
+        });
+        if (testVerify.status === 200) {
+            await axios.delete(`http://test-service:4003/api/test/${section}/test`, {
+                headers: { "x-user-id": owner, Authorization: owner },
+                timeout: 3000
+            });
+        }
+    } catch (error: any) {
+        if (error.response?.status !== 404 && error.code !== 'ECONNABORTED') {
+            throw error;
+        }
+    }
     try{
-        const response = await sendToExtractTextService(imagePath);
-        const notes = response.notes;
         const previous_note = await Note.findOne({section})
         if (previous_note){
             await previous_note.deleteOne();
         }
+        const response = await sendToExtractTextService(imagePath);
+        const notes = response.notes;
         const newNote = new Note({
             notes,
             section,
@@ -47,9 +63,7 @@ export const uploadNotes = async (req: Request, res: Response) => {
             },
         })
         res.status(201).json({message: 'Note added successfully', note: newNote});
-
     }catch(error){
-        console.log(error);
         res.status(500).json({error:"Image upload failed"});
     }
 }
