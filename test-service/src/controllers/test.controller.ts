@@ -94,14 +94,10 @@ export const getTestGenerated = async (req: Request, res: Response) => {
     try{
         const sectionId = req.params.sectionId;
         if (!sectionId){
-            res.status(404).send({error: "Section is empty"})
-            return
-        }
-        const test = await Test.findOne({sectionId})
-        if(!test){
             res.status(404).send({error: "Test not found"})
             return
         }
+        const test = await Test.findOne({sectionId})
         res.status(200).json(test);
     }catch(error){
         res.status(500).json({ error: "Error getting test" });

@@ -3,17 +3,22 @@ import {Toaster} from "sonner";
 import Logo from "../components/Logo.tsx";
 import NavMenu from "../components/section/NavMenu.tsx"
 import {useAuth} from "../hooks/useAuth.ts";
-import {Navigate} from "react-router";
-
 
 export default function SectionLayout() {
     const { isError, isLoading, data } = useAuth();
+    
     if (isLoading) {
         return <div className="bg-gray-800 min-h-screen" />;
     }
+    
     if (isError || !data) {
-        return <Navigate to="/auth/login" replace />;
+        if (isError) {
+            localStorage.removeItem("IntelligTestToken");
+        }
+        window.location.href = '/auth/login';
+        return null;
     }
+    
     return (
         <div className="min-h-screen bg-gray-800 flex flex-col">
             <header className="bg-gray-800 shadow-md">

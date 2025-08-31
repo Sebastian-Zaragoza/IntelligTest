@@ -11,8 +11,10 @@ app.use(express.json());
 app.use("/api/test", router)
 
 const PORT  = process.env.PORT || 4003;
-connect_database().then(()=>{
-    app.listen(PORT, () => {
+const startServer = async () => {
+    await connect_database();
+    app.listen(PORT, ()=>{
         console.log(`Server started on port ${PORT}`);
-    })
-})
+    });
+};
+startServer();

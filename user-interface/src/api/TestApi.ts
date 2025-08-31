@@ -1,5 +1,5 @@
 import api from "../lib/axios";
-import {isAxiosError} from "axios";
+import axios, {isAxiosError} from "axios";
 import {
     type EvaluatePayload,
     rawEvaluateTestSchema,
@@ -43,7 +43,6 @@ export async function evaluateTest(
                 return ia - ib;
             })
             .map(([, v]) => v);
-        console.log(test)
         return evaluateTestSchema.parse({ score, test });
     }catch(err){
     isAxiosError(err) && console.error(isAxiosError(err));
@@ -55,10 +54,13 @@ export async function getTest(sectionId: string) {
     try {
         const { data } = await api.get(`/api/test/${sectionId}/test`);
         return data;
-    } catch (err) {
-        if (isAxiosError(err) && err.response?.status === 404) {
-            return null;
+    }catch (err: unknown) {
+        if (axios.isAxiosError(err)) {
+            if (err.response?.status === 404) {
+                return null;
+            }
+            throw new Error(err.response?.data?.error || err.message);
         }
-        throw new Error("Error occurred while fetching test");
+        throw new Error("Error occurred while getting test");
     }
 }

@@ -16,6 +16,7 @@ const getTestSafe = async (sectionId: string) => {
         return null;
     }
 };
+
 const getNotesSafe = async (sectionId: string) => {
     try {
         return await getNotes(sectionId);

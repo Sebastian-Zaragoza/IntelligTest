@@ -34,6 +34,9 @@ export async function getNotes(sectionId: string){
         return response.data;
     }catch (err: unknown) {
         if (axios.isAxiosError(err)) {
+            if (err.response?.status === 404) {
+                return null;
+            }
             throw new Error(err.response?.data?.error || err.message);
         }
         throw new Error("Error occurred while getting notes");
@@ -44,7 +47,6 @@ export async function updateNotes(sectionId: string, noteId: string, notes: stri
     try{
         const {data} = await api.put<string>(`/api/notes/${sectionId}/notes/${noteId}`, {notes: notes});
         const response = updateNoteResponseSchema.safeParse(data);
-        console.log(response.success);
         if (!response.success){
             throw new Error("Error occurred while updating note");
         }

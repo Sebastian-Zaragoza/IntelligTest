@@ -11,8 +11,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 4001;
-connect_database().then(()=>{
+const startServer = async () => {
+    await connect_database();
     app.listen(PORT, ()=>{
         console.log(`Server started on port ${PORT}`);
-    })
-})
+    });
+};
+startServer();
