@@ -86,6 +86,7 @@ router.get('/user',
 )
 
 router.post('/check-password',
+    userAuthenticate,
     body("password").notEmpty().withMessage("Password is required"),
     handleInputErrors,
     checkPasswordUser

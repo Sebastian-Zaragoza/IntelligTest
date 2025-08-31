@@ -46,6 +46,27 @@ const userProxyConfig: ProxyOptions = {
 };
 router.use("/api/auth/user", authenticate, createProxyMiddleware(userProxyConfig));
 
+const check_passwordProxyConfig: ProxyOptions = {
+    target: "http://auth-service:4001",
+    changeOrigin: true,
+    pathRewrite: {
+        "^/api/auth/check-password": "/api/auth/check-password",
+    },
+    onProxyReq: (proxyReq, req) => {
+        const userId = req.headers["x-user-id"];
+        if (userId) {
+            proxyReq.setHeader("x-user-id", userId);
+        }
+        if (req.body && typeof req.body === 'object') {
+            const bodyData = JSON.stringify(req.body);
+            proxyReq.setHeader('Content-Type', 'application/json');
+            proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+        }
+    }
+};
+router.use("/api/auth/check-password", authenticate, createProxyMiddleware(check_passwordProxyConfig));
+
 const notesProxyConfig: ProxyOptions = {
     target: "http://notes-service:4002",
     changeOrigin: true,

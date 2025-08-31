@@ -1,11 +1,11 @@
 import api from "../lib/axios.ts";
 import {isAxiosError} from "axios";
-import type {
-    ConfirmToken,
-    RequestNewToken,
-    UserRegisterForm,
-    UserLoginForm,
-    RequestNewTokenForgetPassword, NewPasswordResetForm, CheckPasswordForm
+import {
+    type ConfirmToken,
+    type RequestNewToken,
+    type UserRegisterForm,
+    type UserLoginForm,
+    type RequestNewTokenForgetPassword, type NewPasswordResetForm, type CheckPasswordForm, userSchema
 } from "../types/Auth.ts";
 
 export async function createAccount(formData: UserRegisterForm){
@@ -92,9 +92,23 @@ export async function updatePasswordWithToken({formData, token}:{formData: NewPa
     }
 }
 
+export async function getUser() {
+    try{
+        const {data} = await api("/api/auth/user");
+        const response = userSchema.safeParse(data);
+        if(response.success){
+            return response.data;
+        }
+    }catch(error){
+        if(isAxiosError(error) && error.response){
+            throw new Error(error.response.data.error);
+        }
+    }
+}
+
 export async function checkPassword(formData: CheckPasswordForm){
     try{
-        const url = '/auth/check-password';
+        const url = '/api/auth/check-password';
         const {data} = await api.post<string>(url, formData);
         return data;
     }catch(error){

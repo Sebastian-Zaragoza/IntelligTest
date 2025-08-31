@@ -31,9 +31,6 @@ export default function DeleteSectionModal() {
         onError: (error) =>{
             toast.error(error.message);
         },
-        onSuccess: (msg) => {
-            toast.success(msg);
-        }
     })
 
     const deleteSectionMutation = useMutation({

@@ -10,9 +10,9 @@ import {useForm} from "react-hook-form";
 export default function CreateSectionView() {
     const navigate = useNavigate();
     const initialValues: SectionFormData = {
-        name: " ",
-        subject: " ",
-        description: " "
+        name: "",
+        subject: "",
+        description: ""
     };
 
     const mutation = useMutation({
