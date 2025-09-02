@@ -10,11 +10,9 @@ import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
 import type {EvaluateTestResult} from "../../types/Test.ts";
 
-
 export default function GenerateTest() {
     const { sectionId } = useParams<{ sectionId: string }>();
     const navigate = useNavigate();
-
     const { data, isLoading } = useQuery<GeneratedTest>({
         queryKey: ["test", sectionId],
         queryFn: () => generateTest(sectionId!),
@@ -23,7 +21,6 @@ export default function GenerateTest() {
     });
 
     const [strictMode, setStrictMode] = useState(false);
-
     const {
         register,
         handleSubmit,

@@ -30,7 +30,7 @@ export const uploadNotes = async (req: Request, res: Response) => {
     try {
         const testVerify = await axios.get(`http://test-service:4003/api/test/${section}/test`, {
             headers: { "x-user-id": owner, Authorization: owner },
-            timeout: 5000
+            timeout: 3000
         });
         if (testVerify.status === 200) {
             await axios.delete(`http://test-service:4003/api/test/${section}/test`, {
@@ -83,6 +83,24 @@ export const getNote = async (req: Request, res: Response) => {
 }
 
 export const updateNote = async (req: Request, res: Response) => {
+    const owner = req.headers["x-user-id"];
+    const section = req.params.sectionId;
+    try {
+        const testVerify = await axios.get(`http://test-service:4003/api/test/${section}/test`, {
+            headers: { "x-user-id": owner, Authorization: owner },
+            timeout: 3000
+        });
+        if (testVerify.status === 200) {
+            await axios.delete(`http://test-service:4003/api/test/${section}/test`, {
+                headers: { "x-user-id": owner, Authorization: owner },
+                timeout: 3000
+            });
+        }
+    } catch (error: any) {
+        if (error.response?.status !== 404 && error.code !== 'ECONNABORTED') {
+            throw error;
+        }
+    }
     try{
         const note_id = req.params.noteId;
         const notes = req.body.notes;

@@ -46,7 +46,7 @@ export async function evaluateTest(
         return evaluateTestSchema.parse({ score, test });
     }catch(err){
     isAxiosError(err) && console.error(isAxiosError(err));
-    throw new Error("Error occurred while test server generating test");
+    throw new Error("Error occurred while test server evaluating test");
     }
 }
 

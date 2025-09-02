@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import {useQuery, useMutation} from "@tanstack/react-query";
 import { getNotes, updateNotes } from "../../api/NotesApi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
