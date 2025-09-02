@@ -30,7 +30,9 @@ STRICT mode, all incorrect:
   Output line:Incorrect, answers must match exactly/Incorrect, answers must match exactly/0
 LENIENT mode, all correct:
   Message:false.Question:What percentage of the world’s oxygen does the Amazon rainforest produce? Correct Answer: The Amazon rainforest produces about 20 percent of the world’s oxygen. User Answer: 20 percent. Question: What nickname is often given to the Amazon rainforest? Correct Answer: It is often called “the planet’s lungs.” User Answer: I think is “the planet’s lungs.”
-  Output line: Great, the answer is correct/Great, the answer is correct/100
+  Output line: Great, the answer is correct/100
+  Message:false.Question:What is a normal part of life according to the notes? Correct Answer: Experiencing occasional anxiety is a normal part of life. User Answer: Anxiety
+  Output line: Great, the answer is correct/100
 LENIENT mode, mixed:
   Message:false.Question:What percentage of the world’s oxygen does the Amazon rainforest produce? Correct Answer: The Amazon rainforest produces about 20 percent of the world’s oxygen. User Answer: 20 percent. Question: What nickname is often given to the Amazon rainforest? Correct Answer: It is often called “the planet’s lungs.” User Answer: I think is “the planet’s sandwiches.”
   Output line:  Great, the answer is correct/Incorrect, the meaning of the answer doesn't match/50
