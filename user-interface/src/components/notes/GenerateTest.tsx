@@ -9,6 +9,7 @@ import type {EvaluatePayload} from "../../types/Test.ts";
 import {toast} from "sonner";
 import {useNavigate} from "react-router-dom";
 import type {EvaluateTestResult} from "../../types/Test.ts";
+import {useEffect} from "react";
 
 export default function GenerateTest() {
     const { sectionId } = useParams<{ sectionId: string }>();
@@ -23,9 +24,16 @@ export default function GenerateTest() {
     const [strictMode, setStrictMode] = useState(false);
     const {
         register,
+        reset,
         handleSubmit,
         formState: { errors },
     } = useForm<Record<`answer_${number}`, string>>();
+
+    useEffect(() =>{
+        if (data?.questions){
+            reset();
+        }
+    }, [JSON.stringify(data?.questions)])
 
     const mutation = useMutation<
         EvaluateTestResult,
@@ -77,6 +85,7 @@ export default function GenerateTest() {
 
             {/* Questions */}
             {data.questions.map((question, idx) => {
+
                 const name = `answer_${idx}` as const;
                 return (
                     <div key={idx} className="space-y-2">

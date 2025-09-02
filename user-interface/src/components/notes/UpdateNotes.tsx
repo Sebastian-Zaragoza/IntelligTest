@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {useQuery, useMutation} from "@tanstack/react-query";
+import {useQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import { getNotes, updateNotes } from "../../api/NotesApi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
@@ -8,6 +8,7 @@ import {useNavigate} from "react-router";
 export default function UpdateNotes() {
     const { sectionId } = useParams<{ sectionId: string }>();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
     const { data, isLoading } = useQuery({
         queryKey: ["notes", sectionId],
         queryFn: () => getNotes(sectionId!),
@@ -27,6 +28,8 @@ export default function UpdateNotes() {
             toast.error(err.message, { duration: 7000 });
         },
         onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ["notes", sectionId!]});
+            queryClient.invalidateQueries({queryKey: ["test", sectionId!]});
             toast.success("Notes updated successfully", { duration: 7000 });
             navigate(`/sections/${sectionId}/generate-test`);
         },
