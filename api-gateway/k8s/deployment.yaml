@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-deployment
+  namespace: intelligtest-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app/component: api-gateway
+  template:
+    metadata:
+      name:  api-gateway-pod
+      labels:
+        app/name: api-gateway-pod
+        app/component:  api-gateway
+    spec:
+      containers:
+        - name:  api-gateway-container
+          image: zaragozasebastian/api-gateway-intelligtest:1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  key: PORT
+                  name: api-gateway-secrets
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: JWT_SECRET
+                  name: api-gateway-secrets
+            - name: FRONTEND_URL
+              valueFrom:
+                secretKeyRef:
+                  key: FRONTEND_URL
+                  name: api-gateway-secrets
+
+

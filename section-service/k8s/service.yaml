@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: section-service
+  namespace: intelligtest-namespace
+spec:
+  selector:
+    app/component: section-service
+  ports:
+    - port: 4000
+      targetPort: 4000
+  type: ClusterIP
+  

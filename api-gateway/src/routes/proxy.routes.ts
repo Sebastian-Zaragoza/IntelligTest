@@ -5,7 +5,7 @@ import { authenticate } from "../middlewares/auth.middleware";
 const router = Router();
 
 const sectionProxyConfig: ProxyOptions = {
-    target: "http://section-service:4000",
+    target: "http://section-service.intelligtest-namespace.svc.cluster.local:4000",
     changeOrigin: true,
     pathRewrite: {
         "^/api/sections": "/api/sections",
@@ -26,7 +26,7 @@ const sectionProxyConfig: ProxyOptions = {
 router.use("/api/sections", authenticate, createProxyMiddleware(sectionProxyConfig));
 
 const userProxyConfig: ProxyOptions = {
-    target: "http://auth-service:4001",
+    target: "http://auth-service.intelligtest-namespace.svc.cluster.local:4001",
     changeOrigin: true,
     pathRewrite: {
         "^/api/auth/user": "/api/auth/user",
@@ -47,7 +47,7 @@ const userProxyConfig: ProxyOptions = {
 router.use("/api/auth/user", authenticate, createProxyMiddleware(userProxyConfig));
 
 const check_passwordProxyConfig: ProxyOptions = {
-    target: "http://auth-service:4001",
+    target: "http://auth-service.intelligtest-namespace.svc.cluster.local:4001",
     changeOrigin: true,
     pathRewrite: {
         "^/api/auth/check-password": "/api/auth/check-password",
