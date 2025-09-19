@@ -68,7 +68,7 @@ const check_passwordProxyConfig: ProxyOptions = {
 router.use("/api/auth/check-password", authenticate, createProxyMiddleware(check_passwordProxyConfig));
 
 const notesProxyConfig: ProxyOptions = {
-    target: "http://notes-service:4002",
+    target: "http://notes-service.intelligtest-namespace.svc.cluster.local:4002",
     changeOrigin: true,
     pathRewrite: {
         "^/api/notes": "/api/notes",
@@ -95,7 +95,7 @@ const notesProxyConfig: ProxyOptions = {
 router.use("/api/notes", authenticate, createProxyMiddleware(notesProxyConfig));
 
 const testProxyConfig: ProxyOptions = {
-    target: "http://test-service:4003",
+    target: "http://test-service.intelligtest-namespace.svc.cluster.local:4003",
     changeOrigin: true,
     pathRewrite: {
         "^/api/test": "/api/test",

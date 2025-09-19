@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name:  api-gateway-container
-          image: zaragozasebastian/api-gateway-intelligtest:1
+          image: zaragozasebastian/api-gateway-intelligtest:2
           ports:
             - containerPort: 3000
           env:
