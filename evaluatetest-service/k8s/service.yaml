@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: evaluatetest-service
+  namespace: intelligtest-namespace
+spec:
+  selector:
+    app/component: evaluatetest-service
+  ports:
+    - port: 5002
+      targetPort: 5002
+  type: ClusterIP

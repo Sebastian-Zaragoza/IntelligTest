@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: notes-service-container
-          image: zaragozasebastian/notes-service-intelligtest:latest
+          image: zaragozasebastian/notes-service-intelligtest:8
           ports:
             - containerPort: 4002
           env:

@@ -91,7 +91,6 @@ const notesProxyConfig: ProxyOptions = {
         }
     }
 };
-
 router.use("/api/notes", authenticate, createProxyMiddleware(notesProxyConfig));
 
 const testProxyConfig: ProxyOptions = {

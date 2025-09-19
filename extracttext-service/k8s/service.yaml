@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: extracttext-service
+  namespace: intelligtest-namespace
+spec:
+  selector:
+    app/component: extracttext-service
+  ports:
+    - port: 5000
+      targetPort: 5000
+  type: ClusterIP

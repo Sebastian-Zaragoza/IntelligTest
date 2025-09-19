@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generatetest-service-deployment
+  namespace: intelligtest-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app/component: generatetest-service
+  template:
+    metadata:
+      name: generatetest-service-pod
+      labels:
+        app/name: generatetest-service-pod
+        app/component: generatetest-service
+    spec:
+      containers:
+        - name: generatetest-service-container
+          image: zaragozasebastian/generatetest-service-intelligtest:latest
+          ports:
+            - containerPort: 5001
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: OPENAI_API_KEY
+                  name: generatetest-service-secrets
+

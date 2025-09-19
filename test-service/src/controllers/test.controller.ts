@@ -21,14 +21,14 @@ export const generateTest = async (req: Request, res: Response) => {
             res.status(200).send({questions: questions, answers: answers});
             return;
         }
-        const {data} = await axios.get(`http://notes-service:4002/api/notes/${section}/notes`, {
+        const {data} = await axios.get(`http://notes-service.intelligtest-namespace.svc.cluster.local:4002/api/notes/${section}/notes`, {
             headers:{
                 "x-user-id": owner,
                 Authorization: owner
             }
         })
         const {notes} = data;
-        const test = await axios.post(`http://generatetest-service:5001/api/gpt/generate`, {message: notes})
+        const test = await axios.post(`http://generatetest-service.intelligtest-namespace.svc.cluster.local:5001/api/gpt/generate`, {message: notes})
         const questionsAndAnswers: generateTestTypes[] = test.data.response;
         const questionsArray: string[] = questionsAndAnswers.map(item => item.question);
         const answersArray: string[] = questionsAndAnswers.map(item => item.answer);
@@ -69,7 +69,7 @@ export const evaluateTest = async (req: Request, res: Response) => {
             strict_mode: strict,
             test: testEvaluation
         };
-        const results = await axios.post(`http://evaluatetest-service:5002/api/gpt/evaluate`, finalBody)
+        const results = await axios.post(`http://evaluatetest-service.intelligtest-namespace.svc.cluster.local:5002/api/gpt/evaluate`, finalBody)
         res.status(200).json(results.data);
     } catch (error) {
         res.status(500).json({ error: "Test evaluation failed" });

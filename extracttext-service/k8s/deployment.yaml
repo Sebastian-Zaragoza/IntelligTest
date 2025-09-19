@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: extracttext-service-deployment
+  namespace: intelligtest-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app/component: extracttext-service
+  template:
+    metadata:
+      name: extracttext-service-pod
+      labels:
+        app/name: extracttext-service-pod
+        app/component: extracttext-service
+    spec:
+      containers:
+        - name: extracttext-service-container
+          image: zaragozasebastian/extracttext-service-intelligtest:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              valueFrom:
+                secretKeyRef:
+                  key: GOOGLE_APPLICATION_CREDENTIALS
+                  name: extracttext-service-secrets
+

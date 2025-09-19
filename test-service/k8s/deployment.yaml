@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: test-service-container
-          image: zaragozasebastian/test-service-intelligtest:latest
+          image: zaragozasebastian/test-service-intelligtest:1
           ports:
             - containerPort: 4003
           env:

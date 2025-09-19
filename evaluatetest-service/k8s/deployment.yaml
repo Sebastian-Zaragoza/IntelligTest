@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evaluatetest-service-deployment
+  namespace: intelligtest-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app/component: evaluatetest-service
+  template:
+    metadata:
+      name: evaluatetest-service-pod
+      labels:
+        app/name: evaluatetest-service-pod
+        app/component: evaluatetest-service
+    spec:
+      containers:
+        - name: evaluatetest-service-container
+          image: zaragozasebastian/evaluatetest-service-intelligtest:latest
+          ports:
+            - containerPort: 5002
+          env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: OPENAI_API_KEY
+                  name: evaluatetest-service-secrets
+
