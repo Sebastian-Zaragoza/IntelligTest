@@ -81,3 +81,11 @@ coverage.xml
 *.log
 
 extracttext-service/keys/
+
+*-secrets.yaml
+secrets/
+**/k8s/secret.yaml
+**/k8s/*-secrets.yaml
+/k8s/secret.yaml
+git rm --cached k8s/*-secrets.yaml
+
