@@ -2,7 +2,7 @@
 IntelligTest is a next-generation AI-powered platform that transforms the way educational assessments are created and delivered. By converting student notes into personalized, automated exams, it streamlines the entire process—from content input to secure evaluation and insightful feedback. More than just a tool for education, IntelligTest is a showcase of expertise in AI integration, full-stack development, and cloud orchestration, demonstrating the ability to build innovative, end-to-end solutions that are both technically robust and user-focused.
 
 ## Note
-I{ve taken this microservices platform to the next level-migrating from Docker Compose to pure Kubernetes for cleaner, production-grade orchestration. The journey doesn't stop here: the next milestone is deploying on Amazon EKS to unlock cloud-navigate scalability and reliability. Additionally, I'm working on new features such as UI update, statistics, timer, AI recommendations and reminders based on forgetting curve, simulation based on teacher's evaluation and more. Saty tuned, big thins are coming! 
+I've taken this microservices platform to the next level-migrating from Docker Compose to pure Kubernetes for cleaner, production-grade orchestration. The journey doesn't stop here: the next milestone is deploying on Amazon EKS to unlock cloud-navigate scalability and reliability. Additionally, I'm working on new features such as UI update, statistics, timer, AI recommendations and reminders based on forgetting curve, simulation based on teacher's evaluation and more. Saty tuned, big thins are coming! 
 
 ![Kubernetes Deployment](resources/Kubernetes_deployment.gif)
 
