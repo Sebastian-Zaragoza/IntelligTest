@@ -4,7 +4,7 @@ IntelligTest is a next-generation AI-powered platform that transforms the way ed
 ## Note
 I{ve taken this microservices platform to the next level-migrating from Docker Compose to pure Kubernetes for cleaner, production-grade orchestration. The journey doesn't stop here: the next milestone is deploying on Amazon EKS to unlock cloud-navigate scalability and reliability. Additionally, I'm working on new features such as UI update, statistics, timer, AI recommendations and reminders based on forgetting curve, simulation based on teacher's evaluation and more. Saty tuned, big thins are coming! 
 
-![Kubernetes Deployment](resources/kubernetes_deployment.gif)
+![Kubernetes Deployment](resources/Kubernetes_deployment.gif)
 
 ## Demo Views
 Explore the core functionalities of the IntelligTest microservices system through these engaging animated demos. Each GIF highlights a specific feature, demonstrating how the platform streamlines authentication, orchestration, evaluation modes, and content extraction for an efficient and user-friendly experience.
