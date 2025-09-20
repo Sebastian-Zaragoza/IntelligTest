@@ -29,11 +29,6 @@ This demo showcases the rigorous strict evaluation mode, requiring answers to ma
 
 ![Strict-Mode](resources/Strict-Mode.gif)
 
-### Docker Compose Orchestration
-Witness the efficient execution of Docker containers via Compose for rapid orchestration. This setup facilitates quick demos, with upcoming enhancements including UI refinements, unit testing, advanced security measures, migration from a custom API Gateway to AWS Cognito, and full-scale deployment using Kubernetes, Grafana, Prometheus, and other AWS services.
-
-![Compose-Execution](resources/Compose-Execution.gif)
-
 ## Features
 - **Note Upload and Text Extraction**: Upload images or screenshots of notes; extract text using Google Cloud Vision AI.
 - **AI-Driven Test Generation**: Generate customized questions from extracted notes via GPT.
