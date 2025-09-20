@@ -37,13 +37,13 @@ This demo showcases the rigorous strict evaluation mode, requiring answers to ma
 - **Note and Test Management**: Edit extracted notes, organize into sections, and store test data.
 - **Feedback and Scoring**: Automated evaluation of answers with detailed feedback.
 - **Microservices Design**: Independent services for modularity and scalability.
-- **Containerization**: Docker Compose for simplified deployment and orchestration.
+- **Containerization**: Docker and Kubernetes using Minikube.
 
 ## Tech Stack
 
 ### Overall
 - **Architecture**: Microservices with API Gateway for routing.
-- **Containerization**: Docker and Docker Compose.
+- **Containerization**: Docker and Kubernetes.
 - **Authentication**: JWT (JSON Web Tokens).
 - **AI Integrations**: Google Cloud Vision API, OpenAI GPT API.
 - **Databases**: Likely MongoDB or similar for each service (inferred from typical Node.js setups).
@@ -64,7 +64,7 @@ IntelligTest employs a microservices architecture to break down the application 
 The architecture includes:
 - **API Gateway**: Central entry point for all client requests.
 - **Core Services**: Authentication, note handling, text extraction, test generation, evaluation, and storage.
-- **Orchestration**: Docker Compose manages container lifecycles and networking.
+- **Orchestration**: Docker and Kubernetes.
 - **Inter-Service Communication**: Synchronous HTTP calls; potential for asynchronous messaging in future expansions.
 
 ## Services
