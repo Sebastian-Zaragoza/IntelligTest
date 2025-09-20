@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: auth-service-container
-          image: zaragozasebastian/auth-service-intelligtest:latest
+          image: zaragozasebastian/auth-service-intelligtest:1
           ports:
             - containerPort: 4001
           env:

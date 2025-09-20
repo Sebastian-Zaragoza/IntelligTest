@@ -1,4 +1,5 @@
 import { CorsOptions } from "cors";
+/*
 export const corsConfig: CorsOptions = {
     origin: (origin, callback) => {
         if (!origin) {
@@ -12,4 +13,13 @@ export const corsConfig: CorsOptions = {
         callback(new Error(`CORS no found: ${origin}`));
     },
     credentials: true,
+};*/
+
+export const corsConfig: CorsOptions = {
+    origin: (origin, callback) => {
+        console.log("Request Origin:", origin);
+        callback(null, true);
+    },
+    credentials: true,
 };
+
