@@ -1,8 +1,9 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  name: intelligtest-cert
+  name: intelligtest-cert-v3
   namespace: intelligtest-namespace
 spec:
   domains:
     - intelligtest.com
+    - www.intelligtest.com

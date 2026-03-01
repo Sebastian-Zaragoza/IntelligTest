@@ -5,11 +5,29 @@ metadata:
   namespace: intelligtest-namespace
   annotations:
     kubernetes.io/ingress.class: "gce"
-    networking.gke.io/managed-certificates: "intelligtest-cert"
+    kubernetes.io/ingress.global-static-ip-name: "intelligtest-static-ip"
+    networking.gke.io/managed-certificates: "intelligtest-cert-v3"
     kubernetes.io/ingress.allow-http: "true"
 spec:
   rules:
     - host: intelligtest.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: api-gateway-service
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: user-interface-service
+                port:
+                  number: 80
+    - host: www.intelligtest.com
       http:
         paths:
           - path: /api
