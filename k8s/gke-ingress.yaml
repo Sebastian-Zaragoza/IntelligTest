@@ -5,9 +5,12 @@ metadata:
   namespace: intelligtest-namespace
   annotations:
     kubernetes.io/ingress.class: "gce"
+    networking.gke.io/managed-certificates: "intelligtest-cert"
+    kubernetes.io/ingress.allow-http: "true"
 spec:
   rules:
-    - http:
+    - host: intelligtest.com
+      http:
         paths:
           - path: /api
             pathType: Prefix

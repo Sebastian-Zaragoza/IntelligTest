@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: user-interface-container
-          image: zaragozasebastian/user-interface-intelligtest:3
+          image: us-central1-docker.pkg.dev/project-97a13bd3-eba7-4d60-a63/intelligtest-repo/user-interface:v3
           resources:
             requests:
               cpu: "100m"
