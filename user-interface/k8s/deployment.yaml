@@ -4,7 +4,9 @@ metadata:
   name: user-interface-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: user-interface
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: user-interface-container
           image: zaragozasebastian/user-interface-intelligtest:3
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 80
           env:

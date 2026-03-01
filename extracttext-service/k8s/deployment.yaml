@@ -4,7 +4,9 @@ metadata:
   name: extracttext-service-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: extracttext-service
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: extracttext-service-container
           image: zaragozasebastian/extracttext-service-intelligtest:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 5000
           env:

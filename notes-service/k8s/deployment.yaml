@@ -4,7 +4,9 @@ metadata:
   name: notes-service-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: notes-service
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: notes-service-container
           image: zaragozasebastian/notes-service-intelligtest:8
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 4002
           env:

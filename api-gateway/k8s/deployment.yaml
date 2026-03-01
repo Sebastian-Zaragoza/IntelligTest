@@ -5,6 +5,8 @@ metadata:
   namespace: intelligtest-namespace
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: api-gateway
@@ -18,6 +20,10 @@ spec:
       containers:
         - name:  api-gateway-container
           image: zaragozasebastian/api-gateway-intelligtest:3
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 3000
           env:

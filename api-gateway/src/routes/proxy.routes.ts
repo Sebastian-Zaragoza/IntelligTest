@@ -67,6 +67,23 @@ const check_passwordProxyConfig: ProxyOptions = {
 };
 router.use("/api/auth/check-password", authenticate, createProxyMiddleware(check_passwordProxyConfig));
 
+const authProxyConfig: ProxyOptions = {
+    target: "http://auth-service.intelligtest-namespace.svc.cluster.local:4001",
+    changeOrigin: true,
+    pathRewrite: {
+        "^/api/auth": "/api/auth",
+    },
+    onProxyReq: (proxyReq, req) => {
+        if (req.body && typeof req.body === "object") {
+            const bodyData = JSON.stringify(req.body);
+            proxyReq.setHeader("Content-Type", "application/json");
+            proxyReq.setHeader("Content-Length", Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+        }
+    }
+};
+router.use("/api/auth", createProxyMiddleware(authProxyConfig));
+
 const notesProxyConfig: ProxyOptions = {
     target: "http://notes-service.intelligtest-namespace.svc.cluster.local:4002",
     changeOrigin: true,

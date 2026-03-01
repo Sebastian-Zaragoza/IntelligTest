@@ -9,6 +9,12 @@ const app = express();
 
 app.use(cors(corsConfig));
 app.use(express.json());
+app.get("/", (_req, res) => {
+    res.status(200).json({ status: "ok", service: "api-gateway" });
+});
+app.get("/healthz", (_req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 app.use("/", router);
 
 const PORT = process.env.PORT || 3000;

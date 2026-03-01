@@ -4,7 +4,9 @@ metadata:
   name: evaluatetest-service-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: evaluatetest-service
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: evaluatetest-service-container
           image: zaragozasebastian/evaluatetest-service-intelligtest:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 5002
           env:

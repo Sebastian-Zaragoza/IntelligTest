@@ -4,7 +4,9 @@ metadata:
   name: section-service-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: section-service
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: section-service-container
           image: zaragozasebastian/section-service-intelligtest:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 4000
           env:

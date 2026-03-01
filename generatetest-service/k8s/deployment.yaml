@@ -4,7 +4,9 @@ metadata:
   name: generatetest-service-deployment
   namespace: intelligtest-namespace
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app/component: generatetest-service
@@ -18,6 +20,10 @@ spec:
       containers:
         - name: generatetest-service-container
           image: zaragozasebastian/generatetest-service-intelligtest:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           ports:
             - containerPort: 5001
           env:
