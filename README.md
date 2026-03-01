@@ -1,5 +1,10 @@
 ## Overview
-IntelligTest is a cutting-edge, full-stack AI-powered platform designed to revolutionize educational assessment by transforming student notes into personalized, automated exams. Leveraging advanced technologies such as Google Cloud Vision for precise text extraction and OpenAI's GPT for intelligent question generation, this microservices-based application streamlines the entire workflow—from note uploading and test creation to secure evaluation and feedback. Built with scalability in mind, it features a modular architecture that ensures maintainability, robust JWT authentication for user security, and Docker containerization for seamless deployment. Ideal for educators and institutions, IntelligTest not only saves time but also enhances learning outcomes through flexible evaluation modes (strict and semantic). This project demonstrates expertise in AI integration, microservices design, full-stack development (React frontend with Node.js/Express backend), DevOps practices, and cloud services—making it a standout addition to any portfolio for roles in software engineering, AI, or edtech innovation
+IntelligTest is a next-generation AI-powered platform that transforms the way educational assessments are created and delivered. By converting student notes into personalized, automated exams, it streamlines the entire process—from content input to secure evaluation and insightful feedback. More than just a tool for education, IntelligTest is a showcase of expertise in AI integration, full-stack development, and cloud orchestration, demonstrating the ability to build innovative, end-to-end solutions that are both technically robust and user-focused.
+
+## Note
+I've taken this microservices platform to the next level-migrating from Docker Compose to pure Kubernetes for cleaner, production-grade orchestration. The journey doesn't stop here: the next milestone is deploying on Amazon EKS to unlock cloud-navigate scalability and reliability. Additionally, I'm working on new features such as UI update, statistics, timer, AI recommendations and reminders based on forgetting curve, simulation based on teacher's evaluation and more. Saty tuned, big thins are coming! 
+
+![Kubernetes Deployment](resources/Kubernetes_deployment.gif)
 
 ## Demo Views
 Explore the core functionalities of the IntelligTest microservices system through these engaging animated demos. Each GIF highlights a specific feature, demonstrating how the platform streamlines authentication, orchestration, evaluation modes, and content extraction for an efficient and user-friendly experience.
@@ -24,11 +29,6 @@ This demo showcases the rigorous strict evaluation mode, requiring answers to ma
 
 ![Strict-Mode](resources/Strict-Mode.gif)
 
-### Docker Compose Orchestration
-Witness the efficient execution of Docker containers via Compose for rapid orchestration. This setup facilitates quick demos, with upcoming enhancements including UI refinements, unit testing, advanced security measures, migration from a custom API Gateway to AWS Cognito, and full-scale deployment using Kubernetes, Grafana, Prometheus, and other AWS services.
-
-![Compose-Execution](resources/Compose-Execution.gif)
-
 ## Features
 - **Note Upload and Text Extraction**: Upload images or screenshots of notes; extract text using Google Cloud Vision AI.
 - **AI-Driven Test Generation**: Generate customized questions from extracted notes via GPT.
@@ -37,13 +37,13 @@ Witness the efficient execution of Docker containers via Compose for rapid orche
 - **Note and Test Management**: Edit extracted notes, organize into sections, and store test data.
 - **Feedback and Scoring**: Automated evaluation of answers with detailed feedback.
 - **Microservices Design**: Independent services for modularity and scalability.
-- **Containerization**: Docker Compose for simplified deployment and orchestration.
+- **Containerization**: Docker and Kubernetes using Minikube.
 
 ## Tech Stack
 
 ### Overall
 - **Architecture**: Microservices with API Gateway for routing.
-- **Containerization**: Docker and Docker Compose.
+- **Containerization**: Docker and Kubernetes.
 - **Authentication**: JWT (JSON Web Tokens).
 - **AI Integrations**: Google Cloud Vision API, OpenAI GPT API.
 - **Databases**: Likely MongoDB or similar for each service (inferred from typical Node.js setups).
@@ -64,7 +64,7 @@ IntelligTest employs a microservices architecture to break down the application 
 The architecture includes:
 - **API Gateway**: Central entry point for all client requests.
 - **Core Services**: Authentication, note handling, text extraction, test generation, evaluation, and storage.
-- **Orchestration**: Docker Compose manages container lifecycles and networking.
+- **Orchestration**: Docker and Kubernetes.
 - **Inter-Service Communication**: Synchronous HTTP calls; potential for asynchronous messaging in future expansions.
 
 ## Services
