@@ -10,7 +10,7 @@ import {
 
 export async function createAccount(formData: UserRegisterForm){
     try {
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/create-account`;
+        const url = `/api/auth/create-account`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -22,7 +22,7 @@ export async function createAccount(formData: UserRegisterForm){
 
 export async function confirmAccount(formData: ConfirmToken){
     try{
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/confirm-account`;
+        const url = `/api/auth/confirm-account`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -34,7 +34,7 @@ export async function confirmAccount(formData: ConfirmToken){
 
 export async function requestNewCode(formData: RequestNewToken){
     try{
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/request-token`;
+        const url = `/api/auth/request-token`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -46,7 +46,7 @@ export async function requestNewCode(formData: RequestNewToken){
 
 export async function loginAccount(formData: UserLoginForm){
     try{
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/login`;
+        const url = `/api/auth/login`;
         const {data} = await api.post<string>(url, formData)
         localStorage.setItem('IntelligTestToken', data)
     }catch(error){
@@ -58,7 +58,7 @@ export async function loginAccount(formData: UserLoginForm){
 
 export async function forgetPassword(formData: RequestNewTokenForgetPassword){
     try{
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/forget-password`;
+        const url = `/api/auth/forget-password`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -70,7 +70,7 @@ export async function forgetPassword(formData: RequestNewTokenForgetPassword){
 
 export async function validateToken(formData: ConfirmToken){
     try {
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/validate-token`;
+        const url = `/api/auth/validate-token`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
@@ -82,7 +82,7 @@ export async function validateToken(formData: ConfirmToken){
 
 export async function updatePasswordWithToken({formData, token}:{formData: NewPasswordResetForm, token: ConfirmToken['token']}){
     try{
-        const url = `${import.meta.env.VITE_AUTH_URL}/api/auth/update-password/${token}`;
+        const url = `/api/auth/update-password/${token}`;
         const {data} = await api.post<string>(url, formData)
         return data
     }catch(error){
