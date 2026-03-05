@@ -5,9 +5,7 @@ IntelligTest is a next-generation AI-powered platform that transforms the way ed
 This microservices platform has been taken to production — migrating from Docker Compose to pure Kubernetes orchestration and deploying the full system on Google Cloud using Artifact Registry for container image versioning, Cloud Load Balancers for traffic distribution, and a GKE cluster to maintain service isolation, fault containment, and reliability across all microservices. The journey doesn't stop here:  I'm working on new features such as UI update, statistics, timer, AI recommendations and reminders based on forgetting curve, simulation based on teacher's evaluation and more. Saty tuned, big thins are coming! 
 
 ![Google Cloud Deployment](resources/IntelligTestDeployment.gif)
-
 ##
-
 ![Kubernetes Deployment](resources/Kubernetes_deployment.gif)
 
 ## Demo Views
