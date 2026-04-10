@@ -1,34 +1,33 @@
-import  {useState, useRef, type DragEvent, type ChangeEvent} from "react";
-import {useParams} from "react-router-dom";
-import {useMutation} from "@tanstack/react-query";
-import {toast} from "sonner";
-import {uploadNote} from "../../api/NotesApi.ts";
-import {useNavigate} from "react-router-dom";
+import { useState, useRef, type DragEvent, type ChangeEvent } from "react";
+import { useParams } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { uploadNote } from "../../api/NotesApi.ts";
+import { useNavigate } from "react-router-dom";
+import { CloudArrowUpIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 
 export default function UploadNotes() {
-    const navigate = useNavigate()
-    const {sectionId} = useParams<{sectionId: string}>();
+    const navigate = useNavigate();
+    const { sectionId } = useParams<{ sectionId: string }>();
     const [file, setFile] = useState<File | null>(null);
     const [dragActive, setDragActive] = useState(false);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const {mutate} = useMutation({
+    const { mutate } = useMutation({
         mutationFn: ({ sectionId, file }: { sectionId: string; file: File }) =>
             uploadNote(sectionId, file),
         onError: (error) => {
-            toast.error(error.message.toString(),{
-                duration: 7000
-            });
+            toast.error(error.message.toString(), { duration: 7000 });
         },
         onSuccess: () => {
             toast.success("Read the notes extracted and update it");
             setFile(null);
             setLoading(false);
-            navigate(`/sections/${sectionId}/notes`)
-        }
-    })
+            navigate(`/sections/${sectionId}/notes`);
+        },
+    });
 
     const onDragOver = (e: DragEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -50,55 +49,96 @@ export default function UploadNotes() {
         if (!file || !sectionId) return;
         setLoading(true);
         setMessage(null);
-        mutate({sectionId, file})
+        mutate({ sectionId, file });
     };
 
     return (
-        <div className="space-y-6 max-w-lg mx-auto">
-            <div
-                onDragOver={onDragOver}
-                onDragLeave={onDragLeave}
-                onDrop={onDrop}
-                onClick={() => inputRef.current?.click()}
-                className={`
-        border-2 border-dashed border-gray-300 rounded-lg p-8 text-center
-        transition-colors cursor-pointer
-        ${dragActive ? 'bg-gray-50' : 'bg-white'}
-        hover:bg-gray-50
-      `}
-            >
-                <input
-                    ref={inputRef}
-                    type="file"
-                    accept="image/*"
-                    onChange={onChange}
-                    className="hidden"
-                />
-                <p className="text-gray-600">
-                    {file
-                        ? `Selected: ${file.name}`
-                        : 'Drag & drop or click to select an image'}
-                </p>
+        <div className="flex flex-col items-center justify-center min-h-[70vh]">
+            <div className="w-full max-w-md space-y-6">
+
+                {/* Title */}
+                <div className="text-center space-y-1">
+                    <h1
+                        className="text-3xl font-bold text-gray-900"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                    >
+                        Upload Photos
+                    </h1>
+                    <p className="text-sm text-gray-400">
+                        Drop an image of your notes to extract the text automatically
+                    </p>
+                </div>
+
+                {/* Drop zone with camera-upload.jpg as background */}
+                <div
+                    onDragOver={onDragOver}
+                    onDragLeave={onDragLeave}
+                    onDrop={onDrop}
+                    onClick={() => inputRef.current?.click()}
+                    className={`relative h-56 rounded-xl overflow-hidden cursor-pointer border-2 border-dashed transition-all duration-200 ${
+                        dragActive
+                            ? 'border-white/90 scale-[1.01]'
+                            : 'border-white/40 hover:border-white/70'
+                    }`}
+                    style={{
+                        backgroundImage: "url('/resources/camera-upload.jpg')",
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                >
+                    {/* Dark overlay */}
+                    <div className={`absolute inset-0 transition-colors duration-200 ${
+                        dragActive ? 'bg-black/60' : 'bg-black/50'
+                    }`} />
+
+                    <input
+                        ref={inputRef}
+                        type="file"
+                        accept="image/*"
+                        onChange={onChange}
+                        className="hidden"
+                    />
+
+                    {/* Content */}
+                    <div className="relative z-10 flex flex-col items-center justify-center h-full gap-3 px-6 text-center">
+                        {file ? (
+                            <>
+                                <CheckCircleIcon className="w-10 h-10 text-emerald-400" />
+                                <p className="text-white text-sm font-medium break-all">
+                                    {file.name}
+                                </p>
+                                <p className="text-white/60 text-xs">
+                                    Click to change file
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <CloudArrowUpIcon className="w-10 h-10 text-white/80" />
+                                <p className="text-white text-sm">
+                                    Drop your file here, or{' '}
+                                    <span className="underline underline-offset-2">browse</span>
+                                </p>
+                                <p className="text-white/50 text-xs">
+                                    Supports: JPG, PNG, WEBP
+                                </p>
+                            </>
+                        )}
+                    </div>
+                </div>
+
+                {/* Upload button */}
+                <button
+                    onClick={onClickUpload}
+                    disabled={!file || loading}
+                    className="w-full py-3 bg-gray-900 text-white rounded-md font-semibold text-sm hover:bg-gray-800 transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                    {loading ? 'Uploading…' : 'Upload Image'}
+                </button>
+
+                {message && (
+                    <p className="text-center text-sm text-gray-400">{message}</p>
+                )}
             </div>
-
-            <button
-                onClick={onClickUpload}
-                disabled={!file || loading}
-                className="
-        w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold
-        px-6 py-2 rounded-lg shadow transition
-        disabled:opacity-50 disabled:cursor-not-allowed
-      "
-            >
-                {loading ? 'Uploading…' : 'Upload Image'}
-            </button>
-
-            {message && (
-                <p className="mt-2 text-sm text-gray-500">
-                    {message}
-                </p>
-            )}
         </div>
     );
-
 }
