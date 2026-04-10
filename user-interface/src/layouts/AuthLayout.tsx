@@ -1,27 +1,59 @@
 import {Outlet} from "react-router";
-import Logo from "../components/Logo.tsx";
 import {Toaster} from "sonner";
+
 export default function AuthLayout() {
     return (
         <>
-            <div className="relative min-h-screen flex">
-                <div className="absolute py-10 pl-20 items-center columns-2 hidden lg:flex">
-                    <Logo />
-                    <h1 className="text-center font-semibold text-white ">IntelligTest</h1>
-                </div>
+            <div
+                className="min-h-screen flex items-center justify-center p-4 font-inter"
+                style={{
+                    backgroundImage: "url('/resources/abstract-background.jpg')",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="flex w-full max-w-5xl rounded-2xl overflow-hidden border border-white/30 shadow-2xl">
 
-                <div className="hidden lg:flex w-1/2 bg-gray-800 text-white flex-col justify-center items-start pt-20 pl-24 space-y-4">
-                    <h1 className="text-5xl font-bold">Transform Your Notes into</h1>
-                    <h2 className="text-7xl font-bold">
-                        Powerful AI Generated Exams
-                    </h2>
-                    <footer className="mt-auto text-sm opacity-75 py-6">
-                        © 2025 IntelligTest. All rights reserved.
-                    </footer>
+                    {/* Left panel — fixed decorative side */}
+                    <div className="hidden lg:flex relative w-[420px] shrink-0 min-h-[640px] flex-col">
+                        <img
+                            src="/resources/abstract-background.jpg"
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-black/30" />
+
+                        {/* Top label */}
+                        <div className="relative z-10 p-6 flex items-center gap-2">
+                            <img src="/Logo.png" alt="IntelligTest" className="w-7 h-7" />
+                            <span className="text-white/80 text-xs font-semibold tracking-widest uppercase">
+                                IntelligTest
+                            </span>
+                        </div>
+
+                        {/* Bottom headline */}
+                        <div className="relative z-10 mt-auto p-8">
+                            <h2
+                                className="text-white text-[2.2rem] font-bold leading-tight"
+                                style={{fontFamily: "'Playfair Display', serif"}}
+                            >
+                                Transform Your Notes into Powerful AI Generated Exams
+                            </h2>
+                            <p className="text-white/60 text-sm mt-3 leading-relaxed">
+                                Test yourself without it begin boring
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Right panel — auth forms render here via React Router Outlet */}
+                    <div className="flex-1 bg-white flex flex-col min-h-[640px]">
+
+                        <Outlet />
+                    </div>
+
                 </div>
-                <Outlet />
             </div>
-            <Toaster/>
+            <Toaster />
         </>
     );
 }

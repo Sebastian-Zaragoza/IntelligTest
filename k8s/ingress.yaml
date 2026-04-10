@@ -14,7 +14,7 @@ spec:
             backend:
               service:
                 name: api-gateway-service
-
+                
                 port:
                   number: 3000
                   

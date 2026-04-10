@@ -31,31 +31,42 @@ export default function ConfirmAccountView() {
     }
 
     return (
-        <div className="flex flex-1 flex-col justify-center items-center p-8">
-            <div className="w-full max-w-md space-y-6">
-                <h3 className="text-3xl font-bold text-center">Confirm your account</h3>
-                <p className="text-lg text-center">
-                    Enter the code here {' '}
-                    <span className="font-bold">via email</span>
-                </p>
-                <form className="space-y-8 pt-10 bg-white mt-10" noValidate>
-                    <div className="flex justify-between gap-3">
+        <div className="flex flex-1 flex-col justify-center items-center px-10 py-8">
+            <div className="w-full max-w-sm space-y-5">
+
+                <div className="space-y-1 text-center">
+                    <h3
+                        className="text-3xl font-bold text-gray-900"
+                        style={{fontFamily: "'Playfair Display', serif"}}
+                    >
+                        Confirm Account
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                        Enter the 6-digit code sent{' '}
+                        <span className="font-semibold text-gray-600">via email</span>
+                    </p>
+                </div>
+
+                <form className="space-y-6" noValidate>
+                    <div className="flex justify-between gap-2">
                         <PinInput value={token} onChange={handleChange} onComplete={handleComplete}>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
-                            <PinInputField className="w-16 h-20 p-3 rounded-lg border-gray-300 border placeholder-white text-center"></PinInputField>
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+                            <PinInputField className="w-12 h-14 rounded-md border border-gray-200 placeholder-white text-center text-sm font-semibold focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
                         </PinInput>
                     </div>
                 </form>
-                <p className="text-center text-lg">
-                    Request a{' '}
-                    <Link to={'/auth/request-token'} className="text-blue-700 hover:underline">
-                        new code
+
+                <p className="text-center text-sm text-gray-500">
+                    Didn't receive a code?{' '}
+                    <Link to={'/auth/request-token'} className="text-gray-900 font-semibold hover:underline">
+                        Request a new one
                     </Link>
                 </p>
+
             </div>
         </div>
     );

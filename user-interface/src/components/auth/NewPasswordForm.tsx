@@ -33,6 +33,7 @@ export default function NewPasswordForm({token}: NewPasswordFormProps) {
             navigate('/auth/login')
         }
     })
+
     const handleNewPassword = (formData: NewPasswordResetForm) => {
         const data ={
             formData,
@@ -43,17 +44,28 @@ export default function NewPasswordForm({token}: NewPasswordFormProps) {
     }
 
     return (
-        <div className="flex flex-1 flex-col justify-center items-center p-8">
-            <div className="w-full max-w-md space-y-6">
-                <h3 className="text-3xl font-bold text-center">Create a new password</h3>
+        <div className="flex flex-1 flex-col justify-center items-center px-10 py-8">
+            <div className="w-full max-w-sm space-y-5">
+
+                <div className="space-y-1 text-center">
+                    <h3
+                        className="text-3xl font-bold text-gray-900"
+                        style={{fontFamily: "'Playfair Display', serif"}}
+                    >
+                        New Password
+                    </h3>
+                    <p className="text-sm text-gray-400">
+                        Choose a strong password for your account
+                    </p>
+                </div>
 
                 <form className="space-y-4" onSubmit={handleSubmit(handleNewPassword)}>
                     <div>
-                        <label className="block text-sm font-semibold text-gray-700">Password</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
                         <input
                             type="password"
                             placeholder="••••••••"
-                            className="mt-1 block w-full border-b border-gray-300 focus:border-gray-800 focus:ring-0 px-0 py-2 outline-none"
+                            className="block w-full border border-gray-200 rounded-md px-3 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             {...register("password", {
                                 required: "Password is required",
                             })}
@@ -62,12 +74,13 @@ export default function NewPasswordForm({token}: NewPasswordFormProps) {
                             <ErrorMessage>{errors.password.message}</ErrorMessage>
                         )}
                     </div>
+
                     <div>
-                        <label className="block text-sm font-semibold text-gray-700">Confirm password</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Confirm password</label>
                         <input
                             type="password"
                             placeholder="••••••••"
-                            className="mt-1 block w-full border-b border-gray-300 focus:border-gray-800 focus:ring-0 px-0 py-2 outline-none"
+                            className="block w-full border border-gray-200 rounded-md px-3 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                             {...register("confirmPassword", {
                                 required: "Password confirmation is required",
                                 validate: value =>
@@ -78,13 +91,15 @@ export default function NewPasswordForm({token}: NewPasswordFormProps) {
                             <ErrorMessage>{errors.confirmPassword.message}</ErrorMessage>
                         )}
                     </div>
+
                     <button
                         type="submit"
-                        className="w-full py-3 bg-gray-800 text-white rounded-md font-bold hover:opacity-90 transition"
+                        className="w-full py-3 bg-gray-900 text-white rounded-md font-semibold text-sm hover:bg-gray-800 transition"
                     >
-                        Continue
+                        Update Password
                     </button>
                 </form>
+
             </div>
         </div>
     );
