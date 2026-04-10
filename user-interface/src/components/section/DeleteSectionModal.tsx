@@ -11,7 +11,6 @@ import {Transition} from "@headlessui/react";
 import {Dialog} from "@headlessui/react";
 import ErrorMessage from "../auth/ErrorMessage.tsx";
 
-
 export default function DeleteSectionModal() {
     const initialValues: CheckPasswordForm = {
         password : ""
@@ -26,6 +25,7 @@ export default function DeleteSectionModal() {
     const queryClient = useQueryClient();
 
     const {register, handleSubmit, formState : {errors}} = useForm({defaultValues: initialValues})
+
     const checkUserPasswordMutation = useMutation({
         mutationFn: checkPassword,
         onError: (error) =>{
@@ -66,11 +66,11 @@ export default function DeleteSectionModal() {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-black/60" />
+                    <div className="fixed inset-0 bg-black/50" />
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <div className="flex min-h-full items-center justify-center p-4">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -80,52 +80,63 @@ export default function DeleteSectionModal() {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-lg bg-white border-l-4  shadow-xl transition-all p-8 sm:p-10 text-left">
+                            <Dialog.Panel className="w-full max-w-md rounded-xl bg-white shadow-xl overflow-hidden">
 
-                                <Dialog.Title className="text-3xl font-extrabold text-gray-900 mb-4">
-                                    Delete Project
-                                </Dialog.Title>
-
-                                <p className="text-gray-700 mb-6">
-                                    Confirm project deletion by{" "}
-                                    <span className="text-gray-600 font-semibold">
-                                  entering your password
-                                </span>
-                                </p>
-
-                                <form
-                                    onSubmit={handleSubmit(handleForm)}
-                                    noValidate
-                                    className="space-y-6"
-                                >
-                                    <div className="space-y-3">
-                                        <label
-                                            htmlFor="password"
-                                            className="text-sm uppercase font-bold"
-                                        >
-                                            Password
-                                        </label>
-                                        <input
-                                            id="password"
-                                            type="password"
-                                            placeholder="Login password"
-                                            className="w-full p-3 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
-                                            {...register("password", {
-                                                required: "Password is required",
-                                            })}
-                                        />
-                                        {errors.password && (
-                                            <ErrorMessage>{errors.password.message}</ErrorMessage>
-                                        )}
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        className="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 rounded-lg shadow focus:outline-none transition-colors"
+                                {/* Danger stripe */}
+                                <div className="bg-red-600 px-6 py-5">
+                                    <Dialog.Title
+                                        className="text-xl font-bold text-white"
+                                        style={{ fontFamily: "'Playfair Display', serif" }}
                                     >
                                         Delete Section
+                                    </Dialog.Title>
+                                    <p className="text-red-100 text-sm mt-1">
+                                        This action is permanent and cannot be undone.
+                                    </p>
+                                </div>
+
+                                {/* Body */}
+                                <div className="px-6 py-6 space-y-5">
+                                    <p className="text-sm text-gray-600">
+                                        Confirm deletion by entering your{' '}
+                                        <span className="font-semibold text-gray-800">account password</span>.
+                                    </p>
+
+                                    <form onSubmit={handleSubmit(handleForm)} noValidate className="space-y-4">
+                                        <div>
+                                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+                                                Password
+                                            </label>
+                                            <input
+                                                id="password"
+                                                type="password"
+                                                placeholder="••••••••"
+                                                className="block w-full border border-gray-200 rounded-md px-3 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:border-red-400 focus:ring-1 focus:ring-red-400"
+                                                {...register("password", {
+                                                    required: "Password is required",
+                                                })}
+                                            />
+                                            {errors.password && (
+                                                <ErrorMessage>{errors.password.message}</ErrorMessage>
+                                            )}
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold text-sm rounded-md transition"
+                                        >
+                                            Delete Section
+                                        </button>
+                                    </form>
+
+                                    <button
+                                        type="button"
+                                        onClick={() => navigate(location.pathname, { replace: true })}
+                                        className="w-full text-center text-sm text-gray-400 hover:text-gray-600 hover:underline transition"
+                                    >
+                                        Cancel
                                     </button>
-                                </form>
+                                </div>
 
                             </Dialog.Panel>
                         </Transition.Child>
@@ -135,4 +146,3 @@ export default function DeleteSectionModal() {
         </Transition>
     );
 }
-

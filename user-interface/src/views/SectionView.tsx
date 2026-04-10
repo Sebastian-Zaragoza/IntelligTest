@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import  { Fragment, useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { useQuery, useQueries } from "@tanstack/react-query";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 import { getSections } from "../api/SectionApi";
 import { getTest } from "../api/TestApi";
-import {getNotes} from "../api/NotesApi.ts";
+import { getNotes } from "../api/NotesApi.ts";
 import DeleteSectionModal from "../components/section/DeleteSectionModal";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
+import ErrorMessage from "../components/auth/ErrorMessage.tsx";
 
 const getTestSafe = async (sectionId: string) => {
     try {
@@ -80,164 +81,219 @@ function SectionView() {
     if (isLoading) return null;
     if (isError || !sections) {
         return (
-            <div className="max-w-screen-2xl mx-auto w-full px-8 py-8">
-                <p className="text-red-600">Error loading sections.</p>
-            </div>
+            <>
+                <ErrorMessage><p className="text-sm text-red-500">Error loading sections</p></ErrorMessage>
+            </>
         );
     }
 
     return (
         <>
-            <div className="max-w-screen-2xl mx-auto w-full space-y-8 px-8">
-                <div className="flex items-center justify-between">
+            <div className="space-y-8">
+
+                {/* Page header */}
+                <div className="flex items-end justify-between">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-900">My sections</h1>
-                        <p className="mt-1 text-gray-500">Manage your notes by sections</p>
+                        <h1
+                            className="text-3xl font-bold text-gray-900"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                            My Sections
+                        </h1>
+                        <p className="mt-1 text-sm text-gray-400">
+                            Manage your notes and AI-generated tests by section
+                        </p>
                     </div>
                     <Link
                         to="/sections/create"
-                        className="bg-gray-600 hover:bg-gray-700 text-white font-semibold px-5 py-2 rounded-lg shadow-sm transition"
+                        className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-5 py-2.5 rounded-md shadow-sm transition"
                     >
-                        New Section
+                        + New Section
                     </Link>
                 </div>
 
                 {sections.length > 0 ? (
                     <ul
                         role="list"
-                        className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                        className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                     >
                         {sections.map((section) => {
                             const hasTest = hasTestById.get(section._id) ?? false;
                             const hasNotes = hasNotesById.get(section._id) ?? false;
+                            const initial = section.name.charAt(0).toUpperCase();
 
                             return (
                                 <li
                                     key={section._id}
-                                    className="flex flex-col justify-between bg-white rounded-lg shadow p-6 hover:shadow-lg transition w-full"
+                                    className="flex flex-col rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
                                 >
-                                    <div>
+                                    {/* Dark header strip */}
+                                    <div className="bg-gray-900 px-5 py-5">
+                                        <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-3">
+                                            <span
+                                                className="text-white text-lg font-bold"
+                                                style={{ fontFamily: "'Playfair Display', serif" }}
+                                            >
+                                                {initial}
+                                            </span>
+                                        </div>
                                         <Link
                                             to={`/sections/${section._id}/upload`}
-                                            className="block text-xl font-semibold text-gray-800 hover:text-gray-900"
+                                            className="block text-white text-base font-semibold leading-snug hover:text-gray-200 transition-colors line-clamp-2"
+                                            style={{ fontFamily: "'Playfair Display', serif" }}
                                         >
                                             {section.name}
                                         </Link>
-                                        <p className="mt-2 text-gray-600 text-sm">
-                                            {section.description}
-                                        </p>
-                                        <p className="mt-1 text-gray-500 text-xs">
-                                            {section.subject}
-                                        </p>
                                     </div>
 
-                                    <div className="mt-4 flex justify-end">
-                                        <Menu as="div" className="relative">
-                                            <Menu.Button className="p-2 rounded-full text-gray-500 hover:text-gray-900 hover:bg-gray-100 transition">
-                                                <span className="sr-only">Options</span>
-                                                <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                                            </Menu.Button>
+                                    {/* Card body */}
+                                    <div className="bg-white flex flex-col flex-1 px-5 py-4 gap-3">
+                                        <div>
+                                            <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
+                                                {section.subject}
+                                            </span>
+                                            <p className="mt-1 text-sm text-gray-600 leading-relaxed line-clamp-2">
+                                                {section.description}
+                                            </p>
+                                        </div>
 
-                                            <Transition
-                                                as={Fragment}
-                                                enter="transition ease-out duration-100"
-                                                enterFrom="transform opacity-0 scale-95"
-                                                enterTo="transform opacity-100 scale-100"
-                                                leave="transition ease-in duration-75"
-                                                leaveFrom="transform opacity-100 scale-100"
-                                                leaveTo="transform opacity-0 scale-95"
-                                            >
-                                                <Menu.Items className="absolute right-0 mt-2 w-48 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
-                                                    <Menu.Item>
-                                                        {({ active }) =>
-                                                            hasNotes ? (
-                                                                <Link
-                                                                    to={`/sections/${section._id}/notes`}
-                                                                    className={`block px-4 py-2 text-sm ${
-                                                                        active ? "bg-gray-100" : ""
-                                                                    }`}
-                                                                >
-                                                                    Update Notes
-                                                                </Link>
-                                                            ) : (
-                                                                <span
-                                                                    className={`block px-4 py-2 text-sm text-gray-400 cursor-not-allowed ${
-                                                                        active ? "bg-gray-100" : ""
-                                                                    }`}
-                                                                    onClick={(e) => e.preventDefault()}
-                                                                >
-                                                              Update Notes
-                                                            </span>
-                                                            )
-                                                        }
-                                                    </Menu.Item>
+                                        {/* Status badges */}
+                                        <div className="flex items-center gap-2">
+                                            <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${
+                                                hasNotes
+                                                    ? 'bg-emerald-50 text-emerald-700'
+                                                    : 'bg-gray-100 text-gray-400'
+                                            }`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${hasNotes ? 'bg-emerald-500' : 'bg-gray-300'}`} />
+                                                Notes
+                                            </span>
+                                            <span className={`inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${
+                                                hasTest
+                                                    ? 'bg-blue-50 text-blue-700'
+                                                    : 'bg-gray-100 text-gray-400'
+                                            }`}>
+                                                <span className={`w-1.5 h-1.5 rounded-full ${hasTest ? 'bg-blue-500' : 'bg-gray-300'}`} />
+                                                Test
+                                            </span>
+                                        </div>
 
-                                                    <Menu.Item>
-                                                        {({ active }) =>
-                                                            hasTest ? (
-                                                                <Link
-                                                                    to={`/sections/${section._id}/generate-test`}
-                                                                    className={`block px-4 py-2 text-sm ${
-                                                                        active ? "bg-gray-100" : ""
-                                                                    }`}
-                                                                >
-                                                                    View Test
-                                                                </Link>
-                                                            ) : (
-                                                                <span
-                                                                    className={`block px-4 py-2 text-sm text-gray-400 cursor-not-allowed ${
-                                                                        active ? "bg-gray-100" : ""
-                                                                    }`}
-                                                                    onClick={(e) => e.preventDefault()}
-                                                                >
-                                                                  View Test
-                                                                </span>
-                                                            )
-                                                        }
-                                                    </Menu.Item>
+                                        {/* Action menu */}
+                                        <div className="flex justify-end mt-auto pt-1">
+                                            <Menu as="div" className="relative">
+                                                <Menu.Button className="p-1.5 rounded-md text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition">
+                                                    <span className="sr-only">Options</span>
+                                                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                                                </Menu.Button>
 
-                                                    <Menu.Item>
-                                                        {({ active }) => (
-                                                            <Link
-                                                                to={`/sections/${section._id}/edit`}
-                                                                className={`block px-4 py-2 text-sm ${
-                                                                    active ? "bg-gray-100" : ""
-                                                                }`}
-                                                            >
-                                                                Edit Section
-                                                            </Link>
-                                                        )}
-                                                    </Menu.Item>
+                                                <Transition
+                                                    as={Fragment}
+                                                    enter="transition ease-out duration-100"
+                                                    enterFrom="transform opacity-0 scale-95"
+                                                    enterTo="transform opacity-100 scale-100"
+                                                    leave="transition ease-in duration-75"
+                                                    leaveFrom="transform opacity-100 scale-100"
+                                                    leaveTo="transform opacity-0 scale-95"
+                                                >
+                                                    <Menu.Items className="absolute right-0 mt-1 w-52 rounded-md bg-white border border-gray-100 shadow-lg focus:outline-none z-10">
+                                                        <div className="py-1">
+                                                            <Menu.Item>
+                                                                {({ active }) =>
+                                                                    hasNotes ? (
+                                                                        <Link
+                                                                            to={`/sections/${section._id}/notes`}
+                                                                            className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                        >
+                                                                            Update Notes
+                                                                        </Link>
+                                                                    ) : (
+                                                                        <span
+                                                                            className={`block px-4 py-2 text-sm text-gray-300 cursor-not-allowed ${active ? 'bg-gray-50' : ''}`}
+                                                                            onClick={(e) => e.preventDefault()}
+                                                                        >
+                                                                            Update Notes
+                                                                        </span>
+                                                                    )
+                                                                }
+                                                            </Menu.Item>
 
-                                                    <Menu.Item>
-                                                        {({ active }) => (
-                                                            <button
-                                                                type="button"
-                                                                onClick={() => navigate(location.pathname + `?deleteSection=${section._id}`)}
-                                                                className={`w-full text-left px-4 py-2 text-sm ${
-                                                                    active ? "bg-gray-100" : ""
-                                                                }`}
-                                                            >
-                                                                Delete Section
-                                                            </button>
-                                                        )}
-                                                    </Menu.Item>
-                                                </Menu.Items>
-                                            </Transition>
-                                        </Menu>
+                                                            <Menu.Item>
+                                                                {({ active }) =>
+                                                                    hasTest ? (
+                                                                        <Link
+                                                                            to={`/sections/${section._id}/generate-test`}
+                                                                            className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                        >
+                                                                            View Test
+                                                                        </Link>
+                                                                    ) : (
+                                                                        <span
+                                                                            className={`block px-4 py-2 text-sm text-gray-300 cursor-not-allowed ${active ? 'bg-gray-50' : ''}`}
+                                                                            onClick={(e) => e.preventDefault()}
+                                                                        >
+                                                                            View Test
+                                                                        </span>
+                                                                    )
+                                                                }
+                                                            </Menu.Item>
+
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <Link
+                                                                        to={`/sections/${section._id}/edit`}
+                                                                        className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                    >
+                                                                        Edit Section
+                                                                    </Link>
+                                                                )}
+                                                            </Menu.Item>
+
+                                                            <div className="border-t border-gray-100 my-1" />
+
+                                                            <Menu.Item>
+                                                                {({ active }) => (
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() => navigate(location.pathname + `?deleteSection=${section._id}`)}
+                                                                        className={`w-full text-left px-4 py-2 text-sm text-red-500 ${active ? 'bg-red-50' : ''}`}
+                                                                    >
+                                                                        Delete Section
+                                                                    </button>
+                                                                )}
+                                                            </Menu.Item>
+                                                        </div>
+                                                    </Menu.Items>
+                                                </Transition>
+                                            </Menu>
+                                        </div>
                                     </div>
                                 </li>
                             );
                         })}
                     </ul>
                 ) : (
-                    <div className="py-10 text-center">
-                        <p className="text-gray-500">
-                            No sections yet. Click “New Section” to get started.
+                    <div className="flex flex-col items-center justify-center py-24 text-center">
+                        <div className="w-14 h-14 rounded-xl bg-gray-900 flex items-center justify-center mb-5">
+                            <span className="text-white text-2xl font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>S</span>
+                        </div>
+                        <h3
+                            className="text-xl font-bold text-gray-800 mb-2"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                            No sections yet
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-6">
+                            Create your first section to start uploading notes and generating tests.
                         </p>
+                        <Link
+                            to="/sections/create"
+                            className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-5 py-2.5 rounded-md transition"
+                        >
+                            + New Section
+                        </Link>
                     </div>
                 )}
             </div>
+
             <DeleteSectionModal />
         </>
     );

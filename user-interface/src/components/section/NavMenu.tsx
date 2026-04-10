@@ -19,8 +19,8 @@ export default function NavMenu({ name }: NavMenuProps) {
 
     return (
         <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button className="inline-flex items-center space-x-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none transition">
-                <span className="font-medium">{name}</span>
+            <Menu.Button className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-md hover:bg-gray-800 focus:outline-none transition">
+                <span>{name}</span>
                 <ChevronDownIcon className="w-4 h-4" />
             </Menu.Button>
 
@@ -33,31 +33,31 @@ export default function NavMenu({ name }: NavMenuProps) {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
             >
-                <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 mt-2 w-48 bg-white rounded-md border border-gray-100 shadow-lg focus:outline-none">
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
                                 <Link
                                     to="/"
                                     className={`${
-                                        active ? 'bg-gray-100 text-gray-900' : 'text-gray-800'
-                                    } flex items-center px-4 py-2 space-x-2 text-sm transition`}
+                                        active ? 'bg-gray-50 text-gray-900' : 'text-gray-700'
+                                    } flex items-center gap-2 px-4 py-2 text-sm transition`}
                                 >
-                                    <DocumentTextIcon className="w-5 h-5" />
+                                    <DocumentTextIcon className="w-4 h-4" />
                                     <span>Sections</span>
                                 </Link>
                             )}
                         </Menu.Item>
-                        <div className="border-t border-gray-200 my-1" />
+                        <div className="border-t border-gray-100 my-1" />
                         <Menu.Item>
                             {({ active }) => (
                                 <button
                                     onClick={logOut}
                                     className={`${
-                                        active ? 'bg-gray-100 text-red-600' : 'text-red-500'
-                                    } flex items-center w-full px-4 py-2 space-x-2 text-sm transition`}
+                                        active ? 'bg-red-50 text-red-600' : 'text-red-500'
+                                    } flex items-center gap-2 w-full px-4 py-2 text-sm transition`}
                                 >
-                                    <ArrowRightOnRectangleIcon className="w-5 h-5" />
+                                    <ArrowRightOnRectangleIcon className="w-4 h-4" />
                                     <span>Log out</span>
                                 </button>
                             )}
