@@ -44,7 +44,7 @@ export default function NavMenu({ name }: NavMenuProps) {
                                     } flex items-center gap-2 px-4 py-2 text-sm transition`}
                                 >
                                     <DocumentTextIcon className="w-4 h-4" />
-                                    <span>Sections</span>
+                                    <span>Dashboard</span>
                                 </Link>
                             )}
                         </Menu.Item>

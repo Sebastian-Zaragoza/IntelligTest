@@ -104,12 +104,14 @@ function SectionView() {
                             Manage your notes and AI-generated tests by section
                         </p>
                     </div>
-                    <Link
-                        to="/sections/create"
-                        className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-5 py-2.5 rounded-md shadow-sm transition"
-                    >
-                        + New Section
-                    </Link>
+                    {sections.length > 0 && (
+                        <Link
+                            to="/sections/create"
+                            className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-5 py-2.5 rounded-md shadow-sm transition"
+                        >
+                            + New Section
+                        </Link>
+                    )}
                 </div>
 
                 {sections.length > 0 ? (
@@ -125,10 +127,10 @@ function SectionView() {
                             return (
                                 <li
                                     key={section._id}
-                                    className="flex flex-col rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+                                    className="flex flex-col rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
                                 >
                                     {/* Dark header strip */}
-                                    <div className="bg-gray-900 px-5 py-5">
+                                    <div className="bg-gray-900 px-5 py-5 rounded-t-xl">
                                         <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center mb-3">
                                             <span
                                                 className="text-white text-lg font-bold"
@@ -147,7 +149,7 @@ function SectionView() {
                                     </div>
 
                                     {/* Card body */}
-                                    <div className="bg-white flex flex-col flex-1 px-5 py-4 gap-3">
+                                    <div className="bg-white flex flex-col flex-1 px-5 py-4 gap-3 rounded-b-xl">
                                         <div>
                                             <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
                                                 {section.subject}
