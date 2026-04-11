@@ -24,7 +24,7 @@ export default function SectionLayout() {
             <header className="bg-white border-b border-gray-100 shadow-sm">
                 <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-8 py-4">
                     <div className="flex items-center gap-3">
-                        <img src="/Logo.png" alt="IntelligTest" className="w-8 h-8" />
+                        <img src="/Logo.png?v=5" alt="IntelligTest" className="w-8 h-8" />
                         <span
                             className="text-sm font-bold text-gray-800"
                             style={{ fontFamily: "'Playfair Display', serif" }}
@@ -32,7 +32,7 @@ export default function SectionLayout() {
                             IntelligTest
                         </span>
                     </div>
-                    <NavMenu name={String(data)} />
+                    <NavMenu name={data.name} />
                 </div>
             </header>
 

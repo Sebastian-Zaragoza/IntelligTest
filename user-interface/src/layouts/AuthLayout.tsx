@@ -25,7 +25,7 @@ export default function AuthLayout() {
 
                         {/* Top label */}
                         <div className="relative z-10 p-6 flex items-center gap-2">
-                            <img src="/Logo.png" alt="IntelligTest" className="w-7 h-7" />
+                            <img src="/Logo.png?v=5" alt="IntelligTest" className="w-7 h-7" />
                             <span
                                 className="text-white/80 text-xs font-semibold tracking-widest uppercase"
                                 style={{ fontFamily: "'Playfair Display', serif" }}

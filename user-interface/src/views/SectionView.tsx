@@ -196,14 +196,14 @@ function SectionView() {
                                                     leaveFrom="transform opacity-100 scale-100"
                                                     leaveTo="transform opacity-0 scale-95"
                                                 >
-                                                    <Menu.Items className="absolute right-0 mt-1 w-52 rounded-md bg-white border border-gray-100 shadow-lg focus:outline-none z-10">
+                                                    <Menu.Items className="absolute right-0 mt-1 w-52 rounded-md bg-white border border-gray-100 shadow-lg focus:outline-none z-10 font-inter text-sm">
                                                         <div className="py-1">
                                                             <Menu.Item>
                                                                 {({ active }) =>
                                                                     hasNotes ? (
                                                                         <Link
                                                                             to={`/sections/${section._id}/notes`}
-                                                                            className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                            className={`block px-4 py-2 text-gray-600 ${active ? 'bg-gray-50' : ''}`}
                                                                         >
                                                                             Update Notes
                                                                         </Link>
@@ -223,7 +223,7 @@ function SectionView() {
                                                                     hasTest ? (
                                                                         <Link
                                                                             to={`/sections/${section._id}/generate-test`}
-                                                                            className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                            className={`block px-4 py-2 text-gray-600 ${active ? 'bg-gray-50' : ''}`}
                                                                         >
                                                                             View Test
                                                                         </Link>
@@ -242,7 +242,7 @@ function SectionView() {
                                                                 {({ active }) => (
                                                                     <Link
                                                                         to={`/sections/${section._id}/edit`}
-                                                                        className={`block px-4 py-2 text-sm text-gray-700 ${active ? 'bg-gray-50' : ''}`}
+                                                                        className={`block px-4 py-2 text-gray-600 ${active ? 'bg-gray-50' : ''}`}
                                                                     >
                                                                         Edit Section
                                                                     </Link>

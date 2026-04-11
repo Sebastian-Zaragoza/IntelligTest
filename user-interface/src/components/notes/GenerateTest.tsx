@@ -16,7 +16,7 @@ export default function GenerateTest() {
     const { sectionId } = useParams<{ sectionId: string }>();
     const navigate = useNavigate();
 
-    const { data, isLoading } = useQuery<GeneratedTest>({
+    const { data, isLoading, isFetching } = useQuery<GeneratedTest>({
         queryKey: ["test", sectionId],
         queryFn: () => generateTest(sectionId!),
         enabled: Boolean(sectionId),
@@ -63,8 +63,8 @@ export default function GenerateTest() {
         mutation.mutate(payload);
     };
 
-    // Show Lottie overlay while the test is being generated (OpenAI call)
-    if (isLoading) {
+    // Show Lottie overlay while generating OR while replacing an old cached test
+    if (isLoading || isFetching) {
         return (
             <>
                 {animationData && (
