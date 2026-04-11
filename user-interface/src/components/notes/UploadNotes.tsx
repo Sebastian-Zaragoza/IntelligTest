@@ -62,7 +62,7 @@ export default function UploadNotes() {
                         className="text-3xl font-bold text-gray-900"
                         style={{ fontFamily: "'Playfair Display', serif" }}
                     >
-                        Upload Photos
+                        Upload Photo
                     </h1>
                     <p className="text-sm text-gray-400">
                         Drop an image of your notes to extract the text automatically

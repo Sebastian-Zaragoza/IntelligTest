@@ -20,7 +20,7 @@ export default function NavMenu({ name }: NavMenuProps) {
     return (
         <Menu as="div" className="relative inline-block text-left">
             <Menu.Button className="inline-flex items-center gap-2 px-4 py-2 bg-gray-900 text-white text-sm font-semibold rounded-md hover:bg-gray-800 focus:outline-none transition">
-                <span>{name}</span>
+                <span style={{ fontFamily: "'Playfair Display', serif" }}>{name}</span>
                 <ChevronDownIcon className="w-4 h-4" />
             </Menu.Button>
 

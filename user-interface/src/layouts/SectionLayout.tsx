@@ -32,7 +32,7 @@ export default function SectionLayout() {
                             IntelligTest
                         </span>
                     </div>
-                    <NavMenu name="Zaragoza" />
+                    <NavMenu name={String(data)} />
                 </div>
             </header>
 
