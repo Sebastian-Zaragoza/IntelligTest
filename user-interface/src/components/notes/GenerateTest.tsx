@@ -10,12 +10,13 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import type { EvaluateTestResult } from "../../types/Test.ts";
 import { Link } from "react-router-dom";
+import Lottie from "lottie-react";
 
 export default function GenerateTest() {
     const { sectionId } = useParams<{ sectionId: string }>();
     const navigate = useNavigate();
 
-    const { data } = useQuery<GeneratedTest>({
+    const { data, isLoading } = useQuery<GeneratedTest>({
         queryKey: ["test", sectionId],
         queryFn: () => generateTest(sectionId!),
         enabled: Boolean(sectionId),
@@ -23,6 +24,8 @@ export default function GenerateTest() {
     });
 
     const [strictMode, setStrictMode] = useState(false);
+    const [animationData, setAnimationData] = useState<object | null>(null);
+
     const {
         register,
         reset,
@@ -35,6 +38,13 @@ export default function GenerateTest() {
             reset();
         }
     }, [JSON.stringify(data?.questions)]);
+
+    useEffect(() => {
+        fetch('/resources/Material wave loading.json')
+            .then(r => r.json())
+            .then(setAnimationData)
+            .catch(console.error);
+    }, []);
 
     const mutation = useMutation<EvaluateTestResult, Error, EvaluatePayload>({
         mutationFn: (payload) => evaluateTest(sectionId!, payload),
@@ -53,9 +63,55 @@ export default function GenerateTest() {
         mutation.mutate(payload);
     };
 
+    // Show Lottie overlay while the test is being generated (OpenAI call)
+    if (isLoading) {
+        return (
+            <>
+                {animationData && (
+                    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm">
+                        <Lottie
+                            animationData={animationData}
+                            loop={true}
+                            className="w-72 h-72"
+                        />
+                        <p
+                            className="text-xl font-bold text-gray-900 mt-2"
+                            style={{ fontFamily: "'Playfair Display', serif" }}
+                        >
+                            Generating your test
+                        </p>
+                        <p className="text-sm text-gray-400 mt-1">
+                            Our AI is creating personalized questions from your notes
+                        </p>
+                    </div>
+                )}
+            </>
+        );
+    }
+
     if (!data) return null;
 
     return (
+        <>
+        {/* Evaluation overlay — covers everything while AI scores the test */}
+        {mutation.isPending && animationData && (
+            <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm">
+                <Lottie
+                    animationData={animationData}
+                    loop={true}
+                    className="w-72 h-72"
+                />
+                <p
+                    className="text-xl font-bold text-gray-900 mt-2"
+                    style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                    Evaluating your test
+                </p>
+                <p className="text-sm text-gray-400 mt-1">
+                    Our AI is reviewing your answers and preparing feedback
+                </p>
+            </div>
+        )}
         <div className="max-w-2xl mx-auto py-4 space-y-6">
 
             {/* Header */}
@@ -138,10 +194,11 @@ export default function GenerateTest() {
                     disabled={mutation.isPending}
                     className="w-full py-3 bg-gray-900 text-white rounded-md font-semibold text-sm hover:bg-gray-800 transition disabled:opacity-40 disabled:cursor-not-allowed"
                 >
-                    {mutation.isPending ? 'Evaluating…' : 'Submit Test'}
+                    {mutation.isPending ? 'Evaluating' : 'Submit Test'}
                 </button>
 
             </form>
         </div>
+        </>
     );
 }
