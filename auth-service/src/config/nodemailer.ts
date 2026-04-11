@@ -13,7 +13,7 @@ export async function sendEmail(opts: {
 }) {
     try {
         const data = await resend.emails.send({
-            from: "IntelligTest <onboarding@resend.dev>",
+            from: "IntelligTest <noreply@intelligtest.com>",
             to: opts.to,
             subject: opts.subject,
             html: opts.html,

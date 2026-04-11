@@ -11,7 +11,7 @@ interface IEmail {
 
 export class AuthEmails {
     static sendConfirmationEmail = async (user: IEmail) => {
-        const url = `www.https://intelligtest.com/auth/confirm-account`;
+        const url = `https://intelligtest.com/auth/confirm-account`;
         await sendEmail({
             to: user.email,
             subject: "IntelligTest - Confirm your account",
@@ -49,7 +49,7 @@ export class AuthEmails {
     };
 
     static sendPasswordResetToken = async (user: IEmail) => {
-        const url = `www.https://intelligtest.com/auth/new-password`;
+        const url = `https://intelligtest.com/auth/new-password`;
         await sendEmail({
             to: user.email,
             subject: "IntelligTest - Reset your password",
