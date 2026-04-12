@@ -9,6 +9,9 @@ import {
     loginAccount,
     requestToken, updatePassword, userAuthenticate, validateToken
 } from "../controllers/auth.controller";
+import passport from "../config/passport";
+import {IUser} from "../models/user.model";
+import {generateJWT} from "../utils/jwt";
 
 const router = Router()
 
@@ -91,5 +94,24 @@ router.post('/check-password',
     handleInputErrors,
     checkPasswordUser
 )
+
+// Google OAuth
+router.get(
+    "/google",
+    passport.authenticate("google", { scope: ["profile", "email"], session: false })
+);
+
+router.get(
+    "/google/callback",
+    passport.authenticate("google", {
+        failureRedirect: "https://intelligtest.com/auth/login?error=google_failed",
+        session: false,
+    }),
+    (req, res) => {
+        const user = req.user as IUser;
+        const token = generateJWT({ payload: user.id });
+        res.redirect(`https://intelligtest.com/auth/google/success?token=${token}`);
+    }
+);
 
 export default router;

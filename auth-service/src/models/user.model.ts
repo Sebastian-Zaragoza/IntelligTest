@@ -4,7 +4,8 @@ export interface IUser extends Document{
     name: string,
     email: string,
     password: string,
-    confirmPassword: boolean
+    confirmPassword: boolean,
+    googleId?: string,
 }
 
 export const UsersSchema = new Schema({
@@ -22,11 +23,16 @@ export const UsersSchema = new Schema({
     },
     password:{
         type: String,
-        required: true,
+        required: false,
     },
     confirmPassword:{
         type: Boolean,
         default: false
+    },
+    googleId:{
+        type: String,
+        required: false,
+        sparse: true,
     }
 }, {timestamps:true})
 
