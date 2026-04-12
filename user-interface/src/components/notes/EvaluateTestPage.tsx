@@ -42,7 +42,7 @@ export default function EvaluateTestPage() {
             {/* Return to sections */}
             <div className="text-center pt-2">
                 <Link
-                    to="/"
+                    to="/dashboard"
                     className="text-sm text-gray-400 hover:text-gray-700 hover:underline transition"
                 >
                     Return to Sections

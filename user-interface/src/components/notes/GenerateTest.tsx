@@ -117,7 +117,7 @@ export default function GenerateTest() {
             {/* Header */}
             <div>
                 <Link
-                    to="/"
+                    to="/dashboard"
                     className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-700 transition mb-4"
                 >
                     ← Back to Sections

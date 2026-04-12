@@ -38,7 +38,7 @@ export default function NavMenu({ name }: NavMenuProps) {
                         <Menu.Item>
                             {({ active }) => (
                                 <Link
-                                    to="/"
+                                    to="/dashboard"
                                     className={`${
                                         active ? 'bg-gray-50 text-gray-900' : 'text-gray-700'
                                     } flex items-center gap-2 px-4 py-2 text-sm transition`}

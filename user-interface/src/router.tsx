@@ -14,13 +14,18 @@ import GenerateTest from "./components/notes/GenerateTest.tsx";
 import EvaluateTestPage from "./components/notes/EvaluateTestPage.tsx";
 import CreateSectionView from "./views/section/CreateSectionView.tsx";
 import EditSectionView from "./views/section/EditSectionView.tsx";
+import GoogleAuthSuccess from "./views/auth/GoogleAuthSuccess.tsx";
+import PrivacyPolicyView from "./views/PrivacyPolicyView.tsx";
+import TermsOfServiceView from "./views/TermsOfServiceView.tsx";
+import LandingView from "./views/LandingView.tsx";
 
 export default function Router() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path={'/'} element={<LandingView/>}/>
                 <Route element={<SectionLayout/>}>
-                    <Route path="/" element={<SectionView/>} index></Route>
+                    <Route path="/dashboard" element={<SectionView/>} index></Route>
                     <Route path="/sections/create" element={<CreateSectionView/>}></Route>
                     <Route path="/sections/:sectionId/edit" element={<EditSectionView/>}></Route>
                     <Route path="/sections/:sectionId/upload" element={<UploadNotes/>}/>
@@ -36,6 +41,9 @@ export default function Router() {
                     <Route path={'/auth/forget-password'} element={<ForgetPasswordView/>}/>
                     <Route path={'/auth/new-password'} element={<NewPasswordView/>}/>
                 </Route>
+                <Route path={'/auth/google/success'} element={<GoogleAuthSuccess/>}/>
+                <Route path={'/privacy-policies'} element={<PrivacyPolicyView/>}/>
+                <Route path={'/terms-of-service'} element={<TermsOfServiceView/>}/>
             </Routes>
         </BrowserRouter>
     )

@@ -22,7 +22,7 @@ export default function CreateSectionView() {
         },
         onSuccess: (msg) =>{
             toast.success(msg);
-            navigate("/");
+            navigate("/dashboard");
         }
     });
 
@@ -36,7 +36,7 @@ export default function CreateSectionView() {
 
             <div className="mb-7">
                 <Link
-                    to="/"
+                    to="/dashboard"
                     className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-gray-700 transition mb-5"
                 >
                     ← Back to Sections
