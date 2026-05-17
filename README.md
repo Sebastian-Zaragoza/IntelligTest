@@ -41,7 +41,6 @@ This demo showcases the rigorous strict evaluation mode, requiring answers to ma
 - **Containerization**: Docker and Kubernetes using Minikube.
 
 ## Tech Stack
-
 ### Overall
 - **Architecture**: Microservices with API Gateway for routing.
 - **Containerization**: Docker and Kubernetes.
@@ -59,7 +58,8 @@ This demo showcases the rigorous strict evaluation mode, requiring answers to ma
 - Tailwind CSS or similar for styling (inferred from common practices).
 
 ## Microservices Architecture
-
+## Note
+- If you want to know about the entire software architecture analyzed, designed, and implemented, you can view the IntelligTest Notion Page for more details. Feel free to view! [IntelligTest Notion Page Here](https://fish-margin-192.notion.site/IntelligTest-1e62551c1caa80a19cc8cd77ceeca41d)
 IntelligTest employs a microservices architecture to break down the application into independent, loosely coupled services. Each service handles a specific domain responsibility, allowing for independent development, scaling, and deployment. Communication between services is facilitated through the API Gateway, which handles routing, authentication, and load balancing. Services interact via HTTP/REST APIs, with JWT tokens ensuring secure access. This design promotes resilience, as failure in one service does not affect others, and enables easier maintenance and updates.
 
 The architecture includes:
