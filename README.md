@@ -10,8 +10,6 @@ I've successfully deply the entire system at [intelligtest.com](https://intellig
 ## Demo Video
 Explore the core functionalities of the **IntelligTest** in this comprehensive ~2-minute walkthrough. This video demonstrates how the platform streamlines authentication, OCR content extraction, and dual evaluation modes into a seamless, user-friendly experience.
 
-**[Click here to watch the full demo on YouTube](https://www.youtube.com/watch?v=Hig4P99KXTc)**
-
 [![IntelligTest Demo Video](https://img.youtube.com/vi/Hig4P99KXTc/maxresdefault.jpg)](https://www.youtube.com/watch?v=Hig4P99KXTc)
 
 ### Key Features Covered:
