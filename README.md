@@ -7,28 +7,20 @@ I've successfully deply the entire system at [intelligtest.com](https://intellig
 ![Google Cloud Deployment](resources/IntelligTestDeployment.gif)
 ##
 
-## Demo Views
-Explore the core functionalities of the IntelligTest microservices system through these engaging animated demos. Each GIF highlights a specific feature, demonstrating how the platform streamlines authentication, orchestration, evaluation modes, and content extraction for an efficient and user-friendly experience.
+## Demo Video
+Explore the core functionalities of the **IntelligTest** in this comprehensive ~2-minute walkthrough. This video demonstrates how the platform streamlines authentication, OCR content extraction, and dual evaluation modes into a seamless, user-friendly experience.
 
-### Authentication Process
-This demo illustrates the seamless authentication workflow, enabling users to create accounts, log in securely, recover forgotten passwords, and reconfirm unverified accounts—all designed for accessibility and robust security.
+**[Click here to watch the full demo on YouTube](https://www.youtube.com/watch?v=Hig4P99KXTc)**
 
-![Auth-IntelligTest](resources/Auth-IntelligTest.gif)
+[![IntelligTest Demo Video](https://img.youtube.com/vi/Hig4P99KXTc/maxresdefault.jpg)](https://www.youtube.com/watch?v=Hig4P99KXTc)
 
-### Notes Extraction and Customization
-Discover how IntelligTest intelligently extracts key information from screenshots or photos of student notes. Users can then refine the extracted data before effortlessly generating automated tests, empowering educators with smart, customizable tools.
+### Key Features Covered:
 
-![Notes-IntelligTest](resources/Notes-IntelligTest.gif)
-
-### Non-Strict Mode Evaluation
-Experience the flexible non-strict evaluation mode, where answers are deemed correct if they semantically align with the expected response, even without exact matches. In contrast, strict mode demands precise equivalence, offering versatility for varied assessment needs.
-
-![No-Strict-mode](resources/No-Strict-mode.gif)
-
-### Strict Mode Evaluation
-This demo showcases the rigorous strict evaluation mode, requiring answers to match expected responses verbatim for accuracy. Unlike non-strict mode's meaning-based flexibility, it ensures precision in high-stakes evaluations.
-
-![Strict-Mode](resources/Strict-Mode.gif)
+*   **Secure Authentication Workflow:** A robust and accessible process enabling users to create accounts, log in securely, recover passwords, and reconfirm unverified accounts.
+*   **Smart Notes Extraction (OCR) & Customization:** Watch how the system intelligently extracts text from screenshots or photos of notes, allowing users to verify and refine the data before effortlessly generating automated tests.
+*   **Dual Evaluation Modes:** 
+    *   *Non-Strict Mode:* Explores flexible evaluation where answers are validated based on semantic alignment, accepting correct concepts without requiring exact phrasing.
+    *   *Strict Mode:* Showcases rigorous assessment, requiring verbatim equivalence for evaluations that demand absolute precision.
 
 ## Features
 - **Note Upload and Text Extraction**: Upload images or screenshots of notes; extract text using Google Cloud Vision AI.
